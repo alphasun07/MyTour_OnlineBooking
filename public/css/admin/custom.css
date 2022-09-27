@@ -1,0 +1,235 @@
+.body-login {
+  background: #EFF0F4;
+}
+.body-login .login-form {
+  padding-top: calc(50% - 330px);
+}
+.body-login .login-logo {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.body-login .card {
+  border: none;
+}
+.w-20 {
+  width: 20%!important;
+}
+.p-image__name{
+  overflow-wrap: break-word;
+}
+.is-button__ok, .is-button__cancel {
+  display: none;
+}
+
+.page-item.active .page-link {
+  background-color: #343a40!important;
+  border-color: #343a40!important;
+  color: #ffffff!important;
+}
+.page-link {
+  color: #343a40!important;
+  width: max-content;
+}
+
+.pagination li:first-child, .pagination li:last-child {
+  height: 34px;
+  text-align: center;
+}
+.pagination li:first-child span, .pagination li:last-child span, .pagination li:first-child a, .pagination li:last-child a {
+  padding: 0.5rem 0!important;
+  min-width: 40px;
+}
+.modal ul.p-category__list li:hover {
+  cursor: pointer;
+}
+.o-overlay {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 99999 !important;
+  opacity: 0.8;
+  left: 0;
+  top: 0;
+}
+.o-overlay > .btn {
+  left: 50%;
+  margin-left: -4em;
+  top: 50%;
+  margin-top: -4em;
+  position: absolute;
+}
+.o-overlay > .btn > .o-overlay__msg {
+  display: block;
+  color: #fff;
+}
+.o-overlay > .btn > .text-light{
+  color: #fff !important;
+}
+
+.o-overlay {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 99999 !important;
+  opacity: 0.8;
+  left: 0;
+  top: 0;
+}
+.o-overlay > .btn {
+  left: 50%;
+  margin-left: -4em;
+  top: 50%;
+  margin-top: -4em;
+  position: absolute;
+}
+.o-overlay > .btn > .o-overlay__msg {
+  display: block;
+  color: #fff;
+}
+.o-overlay > .btn > .text-light{
+  color: #fff !important;
+}
+
+#is-listImage__preview {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 48vh;
+  padding-right: 1vw;
+}
+a:hover {
+  color: #73879C;
+}
+
+.left_col {
+  background: #2A3F54;
+}
+
+.nav-md .parent_menu {
+  display: inline-block;
+  width: calc(100% - 50px);
+}
+
+.nav-md .md-flex {
+  display: flex;
+}
+
+.o-fontSize_1-5 {
+  font-size: 1.5em;
+}
+.o-dd__a {
+  cursor: pointer;
+  color: #343a40!important;
+}
+.wrap {
+  flex-wrap: wrap!important;
+}
+
+
+.o-li_selected {
+  background: #f1f1f1;
+}
+
+.o-searchOption {
+  background: #f5f5f5;
+  margin-top: 1rem;
+}
+.wrap {
+  flex-wrap: wrap!important;
+}
+
+.w-15 {
+  width: 15% !important;
+}
+
+.w-1 {
+  width: 1%;
+}
+.main_menu .active a span.fa {
+  float: right !important;;
+  text-align: center !important;
+  margin-right: 0px !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.break-word {
+  word-break: break-word;
+}
+.fa-folder-open{
+  color: #5D7590
+}
+
+.p-error__message {
+  color: #E74C3C;
+}
+.o-dt__width--1 {
+  width: 1%;
+}
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
+.nav-sm ul.nav.child_menu {
+    background: #2A3F54;
+}
+
+/* -- CONTROL PANEL STYLES ----------------------------- */
+.dms-dashboard .dms-left a.btn-app {
+    text-align: center;
+    margin-right: 15px;
+    float: left;
+    margin-bottom: 15px;
+
+}
+.dms-dashboard .dms-left a i{
+  font-size: 45px !important;
+}
+.dms-dashboard .dms-left a.btn-app{
+    line-height: 30px;
+    background-color: #fff;
+    background-position: -30px;
+    display: block;
+    float: left;
+    height: 105px;
+    width: 118px !important;
+    color: #565656;
+    vertical-align: middle;
+    text-decoration: none;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-transition-property:
+        background-position,
+        -webkit-border-bottom-left-radius,
+        -webkit-box-shadow;
+    -moz-transition-property:
+        background-position,
+        -moz-border-radius-bottomleft,
+        -moz-box-shadow;
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+}
+
+.dms-dashboard .dms-left a:hover,
+.dms-dashboard .dms-left a:focus,
+.dms-dashboard .dms-left a:active,
+.dms-dashboard .dms-left a:hover,
+.dms-dashboard .dms-left a:focus,
+.dms-dashboard .dms-left a:active {
+    background-position: 0;
+    -webkit-border-bottom-left-radius: 50% 20px;
+    -moz-border-radius-bottomleft: 50% 20px;
+    border-bottom-left-radius: 50% 20px;
+    -webkit-box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: -5px 10px 15px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 10;
+}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/vendor/sitemap/styles/xml.xsl" type="text/xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+	<url>
+	<loc>http://pcm-donation.local.com</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T14:34:12+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/download</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T14:34:12+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/category/1</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T09:57:51+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/category/2</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T09:57:51+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/category/5</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T09:57:51+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/category/6</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T09:57:51+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/terms-and-conditions</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T14:34:12+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/site-map</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T14:34:12+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+	<loc>http://pcm-donation.local.com/contact</loc>
+		<priority>1</priority>
+		<lastmod>2022-08-12T14:34:12+07:00</lastmod>
+		<changefreq>daily</changefreq>
+	</url>
+</urlset>
+

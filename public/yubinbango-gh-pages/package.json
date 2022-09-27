@@ -1,0 +1,33 @@
+{
+  "name": "yubinbango",
+  "version": "1.0.1",
+  "description": "",
+  "main": "yubinbango.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yubinbango/yubinbango.git"
+  },
+  "author": "Teruyuki Kobayashi koba1014@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yubinbango/yubinbango/issues"
+  },
+  "homepage": "https://github.com/yubinbango/yubinbango",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-angular-protractor": "latest",
+    "gulp-exit": "latest",
+    "gulp-webserver": "latest",
+    "run-sequence": "latest",
+    "uglifyjs": "latest"
+  },
+  "dependencies": {
+    "yubinbango-core": "^0.6.3"
+  }
+}

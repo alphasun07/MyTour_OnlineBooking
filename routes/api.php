@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//WMS連携
+Route::post('/wms/shipping', [App\Http\Controllers\WmsController::class, 'shipping']);
+//GMO決裁通知
+Route::post('/gmo/payment_recv', [App\Http\Controllers\GmoController::class, 'payment_recv']);

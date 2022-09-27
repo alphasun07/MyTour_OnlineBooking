@@ -1,0 +1,17 @@
+INSERT INTO `pcm_dms_messages` (`id`, `message_key`, `message`) VALUES
+(1, 'notification_email_subject', 'New Order item : [ITEM_NAME]'),
+(2, 'notification_email_body', 'Dear Administrator <br />\r\nA new order of item [ITEM_NAME] has been placed on your site. The detail information is as follow :<br />\r\n[ORDER_DETAIL]<br />\r\n<br />\r\nRegards,<br />\r\nOssolution Team'),
+(3, 'fd_notification_email_subject', 'New free download of Item : [ITEM_NAME]'),
+(4, 'fd_notification_email_body', 'Dear Administrator<br />\r\n<br />\r\n[FIRST_NAME] [LAST_NAME] has just downloaded [ITEM_NAME] . The download detail is as follow :<br />\r\n<br />\r\n[DOWNLOAD_DETAIL]'),
+(5, 'confirmation_email_subject', 'Order confirmation'),
+(6, 'confirmation_email_body', 'DEAR [FIRST_NAME] [LAST_NAME]<br />\r\nThanks for your order.  The order detail is as follow :<br />\r\n[ORDER_DETAIL]'),
+(7, 'pay_later_email_subject', 'Order Confirmation'),
+(8, 'pay_later_email_body', 'Dear [FIRST_NAME][LAST_NAME]<br />\r\nThanks for purchasing our document .  Your order detail is as follow :<br />\r\n[ORDER_DETAIL]<br />\r\nPlease send the offline payment via our bank account . Information of our bank account is as follow :<br />\r\n<br />\r\nTuan Pham Ngoc, Ngan Hang Ngoai Thuong Vietcombank, Account Number XXX045485467<br />\r\n<br />\r\nAfter receiving your payment , we will activate your account and you can download the extension .<br />\r\n<br />\r\nRegards,<br />\r\nOssolution Team'),
+(9, 'order_activated_email_subject', 'Your order was activated'),
+(10, 'order_activated_email_body', 'Dear [FIRST_NAME][LAST_NAME]<br />\r\nThanks for sending us payment for your order. You order is now activated. You can look at the link in the section below to download purchased documents. <br />\r\n<br />\r\n[ORDER_DETAIL]<br />\r\n<br />\r\nYou can also register for an account on our site (using the email you used to purchase this order) and access to [b]Your orders[/b] menu item to download the documents.<br />\r\n<br />\r\nRegards,<br />\r\nOssolution Team'),
+(11, 'order_form_msg', 'Please enter your information in the form below to order the item: [ITEM_NAME]. The price of [ITEM_NAME] is [AMOUNT].'),
+(12, 'order_form_msg_cart', 'Please enter information in the form below and click on Complete button to process your order.'),
+(13, 'thanks_message', 'Thanks for ordering extensions from our site . Please check your email to download the extension from download links or attachment. You can also view the purchased documents by accessing the link on order details as follow :<br />\r\n<br />\r\n[ORDER_DETAIL]<br />\r\n<br />\r\n<br />\r\nRegards,<br />\r\nOssolution Team'),
+(14, 'thanks_message_offline', ''),
+(15, 'download_form_msg', 'Please enter information in the form below to start downloading document [ITEM_NAME]'),
+(16, 'cancel_message', 'Your Order Canceled');

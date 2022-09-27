@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +17,18 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        //csv毎分取り込み
+        //$schedule->command('csv:import 0')
+        //->everyMinute()
+        //->appendOutputTo(dirname(dirname(dirname(__FILE__))) . '/storage/logs/SampleSchedule.log')
+        //->onSuccess(function () {
+        //    Log::info('成功');
+        //})
+        //->onFailure(function () {
+        //    Log::error('エラー');
+        //})
+        //;
+        $schedule->command('sitemap:create')->dailyAt('00:00');
     }
 
     /**
