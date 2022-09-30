@@ -16,7 +16,7 @@
         @hasSection('title')
         @yield('title')
         @else
-        {{ config('app.name', 'Laravel') }}
+        My Tour
         @endif
     </title>
 
@@ -27,7 +27,6 @@
 
     <!-- Gentelella Bootstrap core CSS -->
     <link href="{{ asset('gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('gentelella-master/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gentelella-master/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <link href="{{ asset('gentelella-master/vendors/dropzone/dist/min/dropzone.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gentelella-master/vendors/bootstrap-chosen/chosen.min.css') }}" rel="stylesheet">
@@ -47,99 +46,63 @@
     <link href="{{ asset('gentelella-master/vendors/animate.css/animate.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet">
 
     @yield('head')
 
 </head>
 
-<body class="o-backColor__gray--thick nav-md flex-wrap">
-    <div class="container body" id="app">
-        <div class="main_container">
-            <div class="col-md-3 left_col menu_fixed mCustomScrollbar _mCS_1 mCS-autoHide" style="overflow: visible;">
-                <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0">
-                    <div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
-                        <div class="left_col scroll-view">
-                            <div class="navbar nav_title" style="border: 0;">
-                                <a href="{{ route('admin.dashboard.index') }}" class="site_title">
-                                    DONATION
-                                </a>
-                            </div>
-                            <div class="clearfix">
-                            </div>
-                            <br>
-                            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                                <div class="menu_section">
-                                    <ul class="nav side-menu">
-                                        <li>
-                                            <a class="md-flex"><i class="fa fa-user"></i><span class="parent_menu">Users</span><span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
-                                                <li><a href="{{route('admin.member.list')}}">Member</a></li>
-                                                <li><a href="{{route('admin.list')}}">Admin</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="md-flex"><i class="fa fa-file-text"></i><span class="parent_menu">Documents Seller</span><span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
-                                                <li><a href="{{route('admin.dms.dashboard')}}">Dashboard </a></li>
-                                                <li><a href="{{ route('admin.category.list') }}">Categories</a></li>
-                                                <li><a href="{{ route('admin.dms.document.index') }}">Documents</a></li>
-                                                <li><a href="{{ route('admin.dms.file') }}">Files</a></li>
-                                                <li><a href="{{ route('admin.coupon.list') }}">Coupon</a></li>
-                                                <li><a href="{{ route('admin.order.list') }}">Orders</a></li>
-                                                <li><a href="{{ route('admin.dms.message') }}">Messages</a></li>
-                                                <li><a href="{{ route('admin.downloadids.list') }}">Download ID Manager</a></li>
-                                                <li><a href="{{ route('admin.tag.list') }}">Tags</a></li>
-                                                <li><a href="{{ route('admin.dms.config') }}">Configuration</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="md-flex"><i class="fa fa-info-circle"></i><span class="parent_menu">Helpdesk Pro</span><span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
-                                                <li><a href="{{route('admin.helpdesk.config')}}">Configuration</a></li>
-                                                <li><a href="{{route('admin.helpdesk.category.list')}}">Categories</a></li>
-                                                <li><a href="{{ route('admin.helpdesk.ticket.list') }}">Ticket Manager</a></li>
-                                                <li><a href="{{ route('admin.helpdesk.ticket.report.list') }}">Tickets report</a></li>
-                                                <li><a href="{{route('admin.helpdesk.activity')}}">Activities Report</a></li>
-                                                <li><a href="{{route('admin.helpdesk.email')}}">Email Messages</a></li>
-                                                <li><a href="{{route('admin.helpdesk.status.list')}}">Status Manager</a></li>
-                                                <li><a href="{{route('admin.helpdesk.priority.list')}}">Tickets Priority Manager</a></li>
-                                                <li><a href="{{route('admin.helpdesk.label.list')}}">Tickets Label Manager</a></li>
-                                                <li><a href="#">Replies Manager</a></li>
-                                                <li><a href="{{route('admin.helpdesk.articles.list')}}">Articles Manager</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a class="md-flex" href="{{route('admin.page.list')}}"><i class="fa fa-file-code-o"></i>Pages</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
+                    class="fas fa-user-secret me-2"></i>Admin</div>
+            <div class="list-group list-group-flush my-3">
+                <a href="index.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "tours") echo "active"; ?>"><i
+                        class="fas fa-tachometer-alt me-2"></i>Quản lý tour</a>
+                <a href="QLNhanVien.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "staff") echo "active"; ?>"><i
+                        class="fas fa-project-diagram me-2"></i>Quản lý nhân viên</a> 
+                <a href="QLDDTour.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "orders") echo "active"; ?>"><i
+                        class="fas fa-paperclip me-2"></i>Quản lý đơn đặt tour</a>  
+                <a href="QLND.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "customers") echo "active"; ?>"><i
+                        class="fas fa-shopping-cart me-2"></i>Quản lý khách hàng</a>         
+              
+                <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
+                        class="fas fa-power-off me-2"></i>Đăng xuất</a>
             </div>
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                    </div>
-                    <nav class="nav navbar-nav">
-                        <ul class=" navbar-right">
-                            <li class="nav-item dropdown open" style="padding-left: 15px;">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">TEST</a>
-                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();"><i class="fa fa-power-off pull-right"></i>Logout</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
                 </div>
-            </div>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php
+                                  // $sql = "select user_name from customers where customer_id = ?";
+                                  // $abcd = simpleQuery($sql, 1, [$_SESSION["user_id"]])[0];
+                                  echo '<i class="fas fa-user me-2"></i>';
+                                  // echo $abcd["user_name"]; 
+
+                                ?>
+                            </a>
+                            <ul class="dropdown-menu" style="right: 0; left: auto;" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
+                                <li><a class="dropdown-item" href="../index.php"> Trang guess</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <div class="right_col" role="main" style="min-height: 777px;">
                 @yield('pageTitle')
                 @include('admin.common.alert')

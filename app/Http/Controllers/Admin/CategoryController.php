@@ -20,7 +20,7 @@ class CategoryController extends Controller
         $parent_categories = (new PcmDmsCategory)->getAll($searchData,true)->paginate(config('const.page.limit'));
         $parent_ids = (new PcmDmsCategory())->getListCategory()->pluck('parent_id')->toArray();
         $parent_ids = array_unique(array_filter($parent_ids));
-        return view('admin.dms.category.index', ['authgroup' => 'admin'], compact('parent_categories', 'searchData', 'parent_ids'));
+        return view('admin.category.index', ['authgroup' => 'admin'], compact('parent_categories', 'searchData', 'parent_ids'));
     }
 
     public function addDetail($id = 0)
@@ -33,7 +33,7 @@ class CategoryController extends Controller
             $category_label = (new Helper())->getTreeLabelCategory($category);
             $list_parent_ids = (new Helper())->getAllParentCategoryByChild($category->parent_id);
         }
-        return view('admin.dms.category.detail', ['authgroup' => 'admin'], compact('category', 'parent_categories', 'category_label', 'list_parent_ids'));
+        return view('admin.category.detail', ['authgroup' => 'admin'], compact('category', 'parent_categories', 'category_label', 'list_parent_ids'));
     }
 
     public function store(CategoryRequest $request)
