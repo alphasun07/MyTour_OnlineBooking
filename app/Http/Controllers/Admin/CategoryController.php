@@ -52,6 +52,7 @@ class CategoryController extends Controller
             $request->session()->flash('success', 'Category has been created.');
             return redirect()->route('admin.category.list');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             Log::info('---store category---');
             Log::error($e->getMessage());
             $request->session()->flash('error', "An error has occurred");
@@ -63,8 +64,7 @@ class CategoryController extends Controller
     {
         $id = $data_request['category_id'] ?? 0;
         $data['name'] = $data_request['name'] ?? '';
-        $data['is_menu'] = $data_request['is_menu'] ?? PcmDmsCategory::IS_MENU_OFF;
-        $data['layout_type'] = $data_request['layout_type'] ?? PcmDmsCategory::LIST;
+
         if ($id != $data_request['parent_id']) {
             $data['parent_id'] = $data_request['parent_id'] ?? 0;
         }

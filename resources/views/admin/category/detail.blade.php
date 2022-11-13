@@ -70,21 +70,6 @@ use App\Helpers\Helper;
                                 </div>
                             </div>
                         </div>
-                        <div class="ml-3 p-2 w-25">
-                            <div class="d-flex flex-row">
-                                <div class="d-flex flex-row">
-                                    <label>Menu</label>
-                                </div>
-                                <div class="ml-5 custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="menu_display" name="is_menu" value="1" {{ ((!old() && isset($category->is_menu) && $category->is_menu == PcmDmsCategory::IS_MENU_ON) || isset($category) || (old() && old('is_menu') == PcmDmsCategory::IS_MENU_ON)) ?  'checked' : '' }}>
-                                    <label for="menu_display" class="custom-control-label">Yes</label>
-                                </div>
-                                <div class="ml-3 custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="menu_hide" name="is_menu" value="0" {{ ((!old() && isset($category->is_menu) && $category->is_menu == PcmDmsCategory::IS_MENU_OFF) || (old() && old('is_menu') == PcmDmsCategory::IS_MENU_OFF)) || (!old() && is_null($category) && (!isset($category->is_menu) || is_null($category->is_menu))) ?  'checked' : '' }}>
-                                    <label for="menu_hide" class="custom-control-label">No</label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -122,23 +107,6 @@ use App\Helpers\Helper;
                                         <strong>{{$errors->first('category_label_selected_1')}}</strong>
                                     </div>
                                     @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex flex-row mb-3">
-                        <div class="p-2 w-100">
-                            <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Layout</label>
-                                <div class="w-75">
-                                    <select name="layout_type" id="layout_type" class="flex-fill w-100 js-length__input" style="width: 100%; padding:13px;">
-                                        <option value="" selected disabled>-Select type-</option>
-                                        @foreach(PcmDmsCategory::LAYOUT as $key => $value)
-                                        <option {{ old('layout_type', isset($category) ? $category->layout_type : '1') == $key ? 'selected' : '' }} value="{{$key}}">{{$value}}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                         </div>

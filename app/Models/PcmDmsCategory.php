@@ -55,14 +55,11 @@ class PcmDmsCategory extends Model
         return $this->belongsToMany(PcmDmsDocument::class, 'pcm_dms_category_documents', 'category_id', 'document_id');
     }
 
-    public function getListCategory($parent = false, $is_menu = false)
+    public function getListCategory($parent = false)
     {
         $query = self::query();
         if ($parent) {
             $query = $query->where('parent_id', 0);
-        }
-        if ($is_menu) {
-            $query = $query->where('is_menu', self::IS_MENU_ON);
         }
         $query->orderBy('ordering', 'asc');
         return $query;
@@ -108,9 +105,5 @@ class PcmDmsCategory extends Model
     public function getPublishedCategory($category_id)
     {
         return self::where('id', $category_id)->where('published', self::PUBLISHED_ON);
-    }
-
-    public function getListCategoryShowOnMenu() {
-        return self::where('is_menu', self::IS_MENU_ON)->where('published', self::PUBLISHED_ON)->get();
     }
 }

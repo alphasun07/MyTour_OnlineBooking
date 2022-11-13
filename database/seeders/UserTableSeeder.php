@@ -25,7 +25,7 @@ class UserTableSeeder extends Seeder
         DB::table('pcm_members')->insert([
             'name'      => 'test',
             'login_id'  => 'admin',
-            'password'  => Hash::make('pcm123!@#$%^'),
+            'password'  => Hash::make('admin123!@#$%^'),
         ]);
 
     }

@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+    @extends('admin.layout.app')
 
 @php
 use Carbon\Carbon;

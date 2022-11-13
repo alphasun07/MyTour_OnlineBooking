@@ -16,7 +16,7 @@
         @hasSection('title')
         @yield('title')
         @else
-        My Tour
+        {{ config('app.name', 'Laravel') }}
         @endif
     </title>
 
@@ -46,63 +46,84 @@
     <link href="{{ asset('gentelella-master/vendors/animate.css/animate.min.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet">
 
     @yield('head')
 
 </head>
 
-
-<body>
-    <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
-        <div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i
-                    class="fas fa-user-secret me-2"></i>Admin</div>
-            <div class="list-group list-group-flush my-3">
-                <a href="index.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "tours") echo "active"; ?>"><i
-                        class="fas fa-tachometer-alt me-2"></i>Quản lý tour</a>
-                <a href="QLNhanVien.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "staff") echo "active"; ?>"><i
-                        class="fas fa-project-diagram me-2"></i>Quản lý nhân viên</a> 
-                <a href="QLDDTour.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "orders") echo "active"; ?>"><i
-                        class="fas fa-paperclip me-2"></i>Quản lý đơn đặt tour</a>  
-                <a href="QLND.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold <?php if($_SESSION["nav"] == "customers") echo "active"; ?>"><i
-                        class="fas fa-shopping-cart me-2"></i>Quản lý khách hàng</a>         
-              
-                <a href="logout.php" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
-                        class="fas fa-power-off me-2"></i>Đăng xuất</a>
+<body class="o-backColor__gray--thick nav-md flex-wrap">
+    <div class="container body" id="app">
+        <div class="main_container">
+            <div class="col-md-3 left_col menu_fixed mCustomScrollbar _mCS_1 mCS-autoHide" style="overflow: visible;">
+                <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0">
+                    <div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+                        <div class="left_col scroll-view">
+                            <div class="navbar nav_title" style="border: 0;">
+                                <a href="{{ route('admin.dms.dashboard') }}" class="site_title">
+                                    MYTOUR.VN
+                                </a>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <br>
+                            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                                <div class="menu_section">
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <a class="md-flex"><i class="far fa-plus-hexagon"></i><span class="parent_menu ml-3">Điều hành</span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="#">Tour</a></li>
+                                                <li><a href="{{ route('admin.place.list') }}">Địa điểm</a></li>
+                                                <li><a href="{{ route('admin.category.list') }}">Loại</a></li>
+                                                <li><a href="#">Hóa đơn</a></li>
+                                                <li><a href="#">Khuyến mãi</a></li>
+                                                <li><a href="#">Dịch vụ</a></li>
+                                                <li><a href="#">Tin tức</a></li>
+                                                <li><a href="#">Khách hàng</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="md-flex"><i class="fal fa-clipboard-user"></i><span class="parent_menu ml-3">Nhân sự</span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="#">Lương</a></li>
+                                                <li><a href="{{ route('admin.list') }}">Admin</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="md-flex"><i class="fas fa-chart-bar"></i></i><span class="parent_menu ml-3">Kế toán</span></a>
+                                            <ul class="nav child_menu">
+                                                <li><a href="#">Quản lý doanh thu</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
-                <div class="d-flex align-items-center">
-                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">TEST</a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();"><i class="fa fa-power-off pull-right"></i>Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php
-                                  // $sql = "select user_name from customers where customer_id = ?";
-                                  // $abcd = simpleQuery($sql, 1, [$_SESSION["user_id"]])[0];
-                                  echo '<i class="fas fa-user me-2"></i>';
-                                  // echo $abcd["user_name"]; 
-
-                                ?>
-                            </a>
-                            <ul class="dropdown-menu" style="right: 0; left: auto;" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
-                                <li><a class="dropdown-item" href="../index.php"> Trang guess</a></li>
-                                <li><a class="dropdown-item" href="logout.php">Đăng xuất</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            </div>
             <div class="right_col" role="main" style="min-height: 777px;">
                 @yield('pageTitle')
                 @include('admin.common.alert')

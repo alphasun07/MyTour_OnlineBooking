@@ -23,11 +23,11 @@ function commonConfirm(message, callback) {
         backdrop: true,
         buttons: {
             confirm: {
-                label: 'Yes',
+                label: 'Có',
                 className: 'btn btn-danger'
             },
             cancel: {
-                label: 'No',
+                label: 'Không',
                 className: 'btn btn-default'
             }
         },
@@ -98,7 +98,7 @@ const LoadCommon = {
     },
 
     delete: function(eThis){
-        commonConfirm('Are you sure you want to delete?', function (result) {
+        commonConfirm('Ban có chắc chắn muốn xóa không?', function (result) {
             if (result) {
                 var eRemove = ($(eThis).data('remove')) ? $($(eThis).data('remove')) : $(eThis).parents('dl:first');
                 $.ajax({
@@ -122,7 +122,7 @@ const LoadCommon = {
 
     deleteCustom: function(eThis) {
         var customMessage = $(eThis).data('message');
-        var confirm = customMessage ? customMessage : 'Are you sure you want to delete?';
+        var confirm = customMessage ? customMessage : 'Ban có chắc chắn muốn xóa không?';
         commonConfirm(confirm, function (result) {
             if(result)  {
                 showOverlay()
@@ -153,7 +153,7 @@ const LoadCommon = {
 
     deletedCustom: function(eThis) {
         var customMessage = $(eThis).data('message');
-        var confirm = customMessage ? customMessage : 'Are you sure you want to deleted?';
+        var confirm = customMessage ? customMessage : 'Ban có chắc chắn muốn xóa không?';
         commonConfirm(confirm, function (result) {
             if(result)  {
                 ids = [$(eThis).data('id')];
@@ -185,7 +185,7 @@ const LoadCommon = {
 
     deleteStatusCustom: function(eThis) {
         var customMessage = $(eThis).data('message');
-        var confirm = customMessage ? customMessage : 'Are you sure you want to deleted?';
+        var confirm = customMessage ? customMessage : 'Ban có chắc chắn muốn xóa không?';
         commonConfirm(confirm, function (result) {
             if(result)  {
                 console.log($(eThis).data('id'));
@@ -226,7 +226,7 @@ const LoadCommon = {
             commonAlert('Please select a page');
             return false;
         }
-        commonConfirm('Are you sure you want to delete?', function (result) {
+        commonConfirm('Ban có chắc chắn muốn xóa không?', function (result) {
             if (result) {
                 $.ajax({
                     url: $(eThis).data('action'),
@@ -298,13 +298,13 @@ $(document).ready(function($) {
 
     $('.js-length__input').bind('keyup',function() {
         let fieldName = $(this).data('field');
-        $('.is-length__input--' + fieldName).html('<strong>'+$(this).val().length+' Characters</strong>')
+        $('.is-length__input--' + fieldName).html('<strong>'+$(this).val().length+' ký tự</strong>')
     });
 
     function lengthStringInput() {
         $('.js-length__input').each(function( index ) {
             let fieldName = $(this).data('field');
-            $('.is-length__input--' + fieldName).html('<strong>'+$(this).val().length+' Characters</strong>')
+            $('.is-length__input--' + fieldName).html('<strong>'+$(this).val().length+' ký tự</strong>')
         });
     }
     setTimeout(lengthStringInput, 200);

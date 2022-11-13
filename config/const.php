@@ -7,7 +7,7 @@ return [
     3 => 'その他'
   ],
   'page' => [
-    'limit' => 20,
+    'limit' => 10,
     'limit_list' => [20, 40, 60, 80, 100]
   ],
   'csv' => [
