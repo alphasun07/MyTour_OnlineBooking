@@ -20,7 +20,6 @@ class CreateToursTable extends Migration
             $table->integer('tour_time');
             $table->string('places');
             $table->float('price_per_person');
-            $table->float('price_per_kid')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->Integer('max_person')->default(5);
             $table->string('thumbnail')->nullable();
@@ -28,6 +27,7 @@ class CreateToursTable extends Migration
             $table->integer('category_id');
             $table->tinyInteger('featured');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
