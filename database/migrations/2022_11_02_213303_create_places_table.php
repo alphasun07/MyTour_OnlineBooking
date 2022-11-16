@@ -17,8 +17,8 @@ class CreatePlacesTable extends Migration
             $table->id();
             $table->string('country', 100);
             $table->string('city', 100);
-            $table->string('province', 100);
-            $table->string('address', 255)->nullable();
+            $table->tinyInteger('type');
+            $table->string('address', 255);
             $table->timestamps();
             $table->softDeletes();
         });
