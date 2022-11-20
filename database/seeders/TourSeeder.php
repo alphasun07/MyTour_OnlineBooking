@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class TourSeeder extends Seeder
 {
@@ -18,6 +17,7 @@ class TourSeeder extends Seeder
         DB::table('pcm_members')->insert([
             'name'              => 'Ten tour',
             'description'       => 'Mo Ta Tour co the dung HTML format',
+            'tour_time'         => '10',
             'places'            => 'dia diem dang "1,2,3,4,5" voi cac so la id trong bang places the hien thu tu chuyen di',
             'price_per_person'  => 'gia tren dau nguoi',
             'status'            => 'trang thai 1: Co san, 2: Khong co san',

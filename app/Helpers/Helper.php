@@ -336,4 +336,17 @@ class Helper
             }
         }
     }
+
+    public function commonObj($listStatus, $typeStatus, $isTrans = false) {
+        if(isset($listStatus[$typeStatus])) {
+            return [
+                'id' => $typeStatus,
+                'name' => $isTrans ? __($listStatus[$typeStatus]) : $listStatus[$typeStatus],
+            ];
+        }
+        return [
+            'id' => null,
+            'name' => null,
+        ];
+    }
 }

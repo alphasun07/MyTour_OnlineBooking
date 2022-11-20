@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryRequest;
 use Illuminate\Support\Facades\Log;
 use App\Models\PcmDmsCategory;
-use App\Models\DtbPost;
 use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller

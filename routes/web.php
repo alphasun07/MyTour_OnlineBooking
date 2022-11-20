@@ -101,6 +101,9 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::get('/edit/{id}', [App\Http\Controllers\Admin\TourController::class, 'detail'])->name('admin.tour.detail');
             Route::post('/store', [App\Http\Controllers\Admin\TourController::class, 'store'])->name('admin.tour.store');
             Route::post('/delete', [App\Http\Controllers\Admin\TourController::class, 'delete'])->name('admin.tour.delete');
+            Route::post('/upload-image', [App\Http\Controllers\Admin\TourController::class, 'uploadImage'])->name('admin.tour.upload.image');
+            Route::post('/remove-image', [App\Http\Controllers\Admin\TourController::class, 'removeImage'])->name('admin.tour.remove.image');
+            Route::post('/get-image-info', [App\Http\Controllers\Admin\TourController::class, 'getImageInfo'])->name('admin.tour.getimage.infor');
         });
 
         //place

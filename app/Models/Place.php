@@ -13,6 +13,7 @@ class Place extends Model
 
     protected $fillable = [
         'country',
+        'name',
         'city',
         'province',
         'address',

@@ -73,7 +73,7 @@
                                         <li>
                                             <a class="md-flex"><i class="far fa-plus-hexagon"></i><span class="parent_menu ml-3">Điều hành</span></a>
                                             <ul class="nav child_menu">
-                                                <li><a href="#">Tour</a></li>
+                                                <li><a href="{{ route('admin.tour.list') }}">Tour</a></li>
                                                 <li><a href="{{ route('admin.place.list') }}">Địa điểm</a></li>
                                                 <li><a href="{{ route('admin.category.list') }}">Loại</a></li>
                                                 <li><a href="#">Hóa đơn</a></li>
