@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrderRequest;
-use App\Models\PcmDmsCountry;
 use Illuminate\Http\Request;
-use App\Models\PcmDmsOrder;
+use App\Models\Order;
 use App\Models\PcmUser;
-use App\Models\PcmDmsDocument;
+use App\Models\Tour;
 use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
@@ -16,24 +15,22 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $searchData = $request->except('page');
-        $orders = (new PcmDmsOrder)->getAll($searchData['name'] ?? '')->paginate(config('const.page.limit'));
+        $orders = (new Order)->getAll($searchData['name'] ?? '')->paginate(config('const.page.limit'));
 
-        return view('admin.dms.order.index', compact('orders', 'searchData'));
+        return view('admin.order.index', compact('orders', 'searchData'));
     }
 
     public function detail($id = 0)
     {
-        $order = $id ? (new PcmDmsOrder)->find($id) : null;
+        $order = $id ? (new Order)->find($id) : null;
         if($id && is_null($order)){
             return redirect()->route('admin.order.list');
         }
 
-        $orderItems = $order ? ($order->documents()->pluck('document_id')->toArray() ?? []) : [];
-        $users = (new PcmUser())->getAllUsers([])->paginate(config('const.page.limit'));
-        $countries = (new PcmDmsCountry())->getAll()->get();
-        $documents = (new PcmDmsDocument())->getAll()->get();
+        $users = (new PcmUser())->getAllUsers([])->get();
+        $tours = (new Tour())->getAll()->get();
 
-        return view('admin.dms.order.detail', compact('order', 'countries', 'users', 'documents', 'orderItems'));
+        return view('admin.order.detail', compact('order', 'users', 'tours'));
     }
 
     public function store(OrderRequest $request)
@@ -41,20 +38,13 @@ class OrderController extends Controller
         try{
             $dataOrder = $request->all();
             $id = $dataOrder['id'] ?? null;
-            $orderItems = isset($dataOrder['document_id']) ? $dataOrder['document_id'] : [];
-
-            if(is_null($dataOrder['referral_code']) || !(new PcmUser())->getByReferralCode($dataOrder['referral_code'], $dataOrder['user_id'])->first()){
-                return redirect()->back()->withInput()->withErrors(['referral_code' => 'This referral code does not exist.']);
-            }
 
             if(!$id){
-                $storedOrder = PcmDmsOrder::create($dataOrder);
-                $storedOrder->documents()->sync($orderItems);
+                Order::create($dataOrder);
             }else{
-                $order = PcmDmsOrder::findOrFail($id);
+                $order = Order::findOrFail($id);
                 $order->fill($dataOrder);
                 $order->save();
-                $order->documents()->sync($orderItems);
             }
 
             $request->session()->flash('success', 'Order has been saved.');
@@ -71,7 +61,7 @@ class OrderController extends Controller
     {
         try {
             $id = $request->id;
-            PcmDmsOrder::whereId($id)->delete();
+            Order::whereId($id)->delete();
             $request->session()->flash('success', 'Order has been deleted');
             return [
                 'success' => true,

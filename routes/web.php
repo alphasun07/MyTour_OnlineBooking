@@ -141,6 +141,15 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::post('/store', [App\Http\Controllers\Admin\CouponController::class, 'store'])->name('admin.coupon.store');
             Route::post('/delete', [App\Http\Controllers\Admin\CouponController::class, 'delete'])->name('admin.coupon.delete');
         });
+
+        //order
+        Route::group(['prefix' => 'order'], function () {
+            Route::get('/', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('admin.order.list');
+            Route::get('/add', [App\Http\Controllers\Admin\OrderController::class, 'detail'])->name('admin.order.add');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\OrderController::class, 'detail'])->name('admin.order.detail');
+            Route::post('/store', [App\Http\Controllers\Admin\OrderController::class, 'store'])->name('admin.order.store');
+            Route::post('/delete', [App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('admin.order.delete');
+        });
     });
 });
 

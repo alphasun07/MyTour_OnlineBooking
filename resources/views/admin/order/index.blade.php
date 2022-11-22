@@ -3,7 +3,7 @@ use App\Models\PcmDmsOrder;
 @endphp
 @extends('admin.layout.app')
 @section('title')
-{{ 'Order management' }}
+{{ 'Hóa đơn' }}
 @endsection
 @section('head')
 <style>
@@ -34,7 +34,7 @@ use App\Models\PcmDmsOrder;
 @endsection
 @section('content')
 @section('pageTitle')
-@include('admin.common.page-title', ['title' => 'Management', 'subTitle' => 'Order management'])
+@include('admin.common.page-title', ['title' => 'Quản lý', 'subTitle' => 'hóa đơn'])
 @endsection
     @csrf
     <div class="row ml-0">
@@ -57,13 +57,10 @@ use App\Models\PcmDmsOrder;
                     <dl class="o-dl__display--table">
                         <dt class="o-dtDd__display--table-cell o-dt__width--1"></dt>
                         <dt class="o-dtDd__display--table-cell text-left o-dt__width--2">#</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-left">First name</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-left">Last name</dt>
+                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-left">Người đặt</dt>
                         <dt class="o-dtDd__display--table-cell o-dt__width--8 text-left">Email</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-left">Items</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-center">Order date</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-center">Amount</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-center">Order status</dt>
+                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-center">Tổng</dt>
+                        <dt class="o-dtDd__display--table-cell o-dt__width--8 text-center">Trạng thái</dt>
                         <dt class="o-dtDd__display--table-cell o-dt__width--5"></dt>
                     </dl>
                     <div id="js-sortable">
@@ -72,14 +69,11 @@ use App\Models\PcmDmsOrder;
                                 <dl class="o-dl__display--table">
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--1"></dd>
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--2">{{$loop->iteration}}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-left o-dt__width--8">{{ $order->first_name ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-left o-dt__width--8">{{ $order->last_name ?? '' }}</dd>
+                                    <dd class="o-dtDd__display--table-cell text-left o-dt__width--8">{{ ($order->user)['name'] ?? '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--8">{{ $order->email ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-left o-dt__width--8"><div class="item-cell">@foreach ($order->documents as $item){{ $item ? ($item->title ?? '') : '' }}<br>@endforeach</div></dd>
-                                    <dd class="o-dtDd__display--table-cell text-center o-dt__width--8">{{ !is_null($order->created_at) ? $order->created_at->format(config('const.format.date_time')) : '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-center o-dt__width--8">{{ $order->total_amount ? number_format($order->total_amount, 2) : '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-center o-dt__width--8"><i class="fa {{ $order->published == PcmDmsOrder::PUBLISHED_ON ? 'fa-check-circle text-success' : 'fa-times-circle text-danger' }}" aria-hidden="true"></i></dd>
-                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.order.edit', ['id' => $order->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.order.delete')}}" data-id="{{ $order->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
+                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.order.detail', ['id' => $order->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.order.delete')}}" data-id="{{ $order->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
                                 </dl>
                             @endforeach
                         @else

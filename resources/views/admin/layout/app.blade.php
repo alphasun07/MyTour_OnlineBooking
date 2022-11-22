@@ -76,7 +76,7 @@
                                                 <li><a href="{{ route('admin.tour.list') }}">Tour</a></li>
                                                 <li><a href="{{ route('admin.place.list') }}">Địa điểm</a></li>
                                                 <li><a href="{{ route('admin.category.list') }}">Loại</a></li>
-                                                <li><a href="#">Hóa đơn</a></li>
+                                                <li><a href="{{ route('admin.order.list') }}">Hóa đơn</a></li>
                                                 <li><a href="{{ route('admin.coupon.list') }}">Khuyến mãi</a></li>
                                                 <li><a href="{{ route('admin.service.list') }}">Dịch vụ</a></li>
                                                 <li><a href="{{ route('admin.post.list') }}">Tin tức</a></li>
