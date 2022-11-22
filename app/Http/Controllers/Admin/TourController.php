@@ -28,13 +28,55 @@ class TourController extends Controller
     public function detail($id = 0)
     {
         $tour = !empty($id) ? Tour::find($id) : null;
+        $tourPlaces = explode(',', $tour->places);
         $places = (new Place())->getAll()->get();
         $categories = (new PcmDmsCategory())->getListCategory()->get();
 
         if (!empty($id) && is_null($tour)) {
             return redirect()->route('admin.tour.list');
         }
-        return view('admin.tours.detail', compact('tour', 'places', 'categories'));
+        return view('admin.tours.detail', compact('tour', 'places', 'categories', 'tourPlaces'));
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $dataPost = $request->all();
+            $id = $dataPost['id'] ?? 0;
+            if (!$id) {
+                Tour::create($dataPost);
+                $request->session()->flash('success', 'Tour has been created');
+            } else {
+                $tour = Tour::findOrFail($id);
+                $tour->fill($dataPost);
+                $tour->save();
+                $request->session()->flash('success', 'Tour has been updated');
+            }
+            return redirect()->route('admin.tour.list');
+        } catch (\Exception $e) {
+            Log::info('---store tour---');
+            Log::error($e->getMessage());
+            $request->session()->flash('error', "An error has occurred");
+            return redirect()->route('admin.tour.list');
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $tour = Tour::find($id);
+            $tour->delete();
+            $request->session()->flash('success', 'Tour has been deleted');
+            return [
+                'success' => true,
+                'redirectTo' => route("admin.tour.list")
+            ];
+        } catch (\Exception $e) {
+            Log::info('---Delete tour---');
+            Log::error($e->getMessage());
+            throw $e;
+        }
     }
 
     public function removeImageEdit($slider, $new_image, $filed)

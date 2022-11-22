@@ -86,14 +86,6 @@ class PcmUser extends Authenticatable
         }
         return $query->orderBy('name');
     }
-    public function getByReferralCode($code, $user_id=0)
-    {
-        $query = self::select(['*']);
-        $query = $query->where('referral_code', $code);
-        if($user_id){
-            $query = $query->where('id', '!=', $user_id);
-        }
-    }
     public function getUserID($userId)
     {
         $query = self::select('name')->where('id',$userId)->first();

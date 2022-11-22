@@ -114,6 +114,15 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::post('/store', [App\Http\Controllers\Admin\PlaceController::class, 'store'])->name('admin.place.store');
             Route::post('/delete', [App\Http\Controllers\Admin\PlaceController::class, 'delete'])->name('admin.place.delete');
         });
+
+        //place
+        Route::group(['prefix' => 'service'], function () {
+            Route::get('/', [App\Http\Controllers\Admin\ServiceController::class, 'index'])->name('admin.service.list');
+            Route::get('/add', [App\Http\Controllers\Admin\ServiceController::class, 'detail'])->name('admin.service.add');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\ServiceController::class, 'detail'])->name('admin.service.detail');
+            Route::post('/store', [App\Http\Controllers\Admin\ServiceController::class, 'store'])->name('admin.service.store');
+            Route::post('/delete', [App\Http\Controllers\Admin\ServiceController::class, 'delete'])->name('admin.service.delete');
+        });
     });
 });
 

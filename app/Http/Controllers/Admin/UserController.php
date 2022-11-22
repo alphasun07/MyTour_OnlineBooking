@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\MemberRequest;
 use App\Models\PcmUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -51,10 +50,6 @@ class UserController extends Controller
                 unset($dataPost['password']);
             }
 
-            if(isset($dataPost['referral_code']) && !is_null($dataPost['referral_code']) && (new PcmUser())->getByReferralCode($dataPost['referral_code'], $dataPost['user_id'])->first()){
-                return redirect()->back()->withInput()->withErrors(['referral_code' => 'This referral code already exists.']);
-            }
-
             if (!$id) {
                 PcmUser::create($dataPost);
             } else {
@@ -89,23 +84,4 @@ class UserController extends Controller
         }
     }
 
-    public function ajaxGetRandomCode()
-    {
-        try{
-            $code = (new Helper())->makeRandomReferralCode();
-
-            return response()->json([
-                'success' => true,
-                'code' => $code,
-            ]);
-
-        } catch (\Exception $e) {
-            Log::info('---ajaxGetRandomCodeError---');
-            Log::error($e->getMessage());
-            return response()->json([
-                'success' => false,
-                'message' => "An error has occurred",
-            ]);
-        }
-    }
 }

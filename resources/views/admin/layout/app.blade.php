@@ -78,9 +78,9 @@
                                                 <li><a href="{{ route('admin.category.list') }}">Loại</a></li>
                                                 <li><a href="#">Hóa đơn</a></li>
                                                 <li><a href="#">Khuyến mãi</a></li>
-                                                <li><a href="#">Dịch vụ</a></li>
+                                                <li><a href="{{ route('admin.service.list') }}">Dịch vụ</a></li>
                                                 <li><a href="#">Tin tức</a></li>
-                                                <li><a href="#">Khách hàng</a></li>
+                                                <li><a href="{{ route('admin.member.list') }}">Khách hàng</a></li>
                                             </ul>
                                         </li>
                                         <li>

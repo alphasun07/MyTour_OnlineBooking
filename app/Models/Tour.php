@@ -35,6 +35,7 @@ class Tour extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'tour_time',
         'places',
         'price_per_person',

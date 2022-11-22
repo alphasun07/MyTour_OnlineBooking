@@ -124,33 +124,6 @@ use App\Models\PcmUser;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Referral Code</label>
-                                <div class="w-75">
-                                    @if($user && $user->referral_code)
-                                        <div class="p-2 flex-fill 22-100" style="font-size: large;">{{ $user->referral_code }}</div>
-                                    @else
-                                        <div class="position-relative">
-                                            <input autocomplete="off" type="text" name="referral_code" value="{{old('referral_code', $user ? '' : $randomReferralCode )}}" data-field="referral_code" class="p-2 flex-fill w-100 js-length__input">
-                                            <div class="position-absolute" style="right: 0;bottom: 0;font-size: 25px;">
-                                                <div class="bg-blue-sky px-2" onClick="getAjaxRandomReferralCode()"><i class="fa fa-refresh" aria-hidden="true"></i></div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @error('referral_code')
-                                    <div class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </div>
-                                    @enderror
-                                    <div id="alert"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex flex-row mb-3">
-                        <div class="p-2 w-100">
-                            <div class="d-flex flex-row">
                                 <label for="" class="mr-4 p-label__small">Password <span class="text-danger">{{ empty($user) ? ' * ' : '' }}</span></label>
                                 <div class="w-75">
                                     <input type="password" name="password" value="{{old('password')}}" data-field="password" class="p-2 flex-fill w-100 js-length__input">
@@ -181,63 +154,4 @@ use App\Models\PcmUser;
 @section('scripts')
 <!-- parsley.js -->
 <script src="{{ asset('js/admin/common.js') }}"></script>
-<script>
-    function getAjaxUserByReferralCode(code, userIdChose){
-        $.ajax({
-            url: "{{ route('admin.order.getUserByReferralCode') }}",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                code: code,
-                userIdChose: userIdChose,
-            },
-            success: function(json) {
-                if(json.success){
-                    $('[role="alert"]').html('');
-                    $('#alert').html('<div class="text-danger" role="alert">This referral code already exists</div>');
-                } else {
-                    $('[role="alert"]').html('');
-                    $('#alert').html('<div class="text-success" role="alert">This referral code is usable</div>');
-                }
-            },
-            error: function(json) {
-                //
-            }
-        });
-    }
-
-    function getAjaxRandomReferralCode(){
-        $.ajax({
-            url: "{{ route('admin.member.randomCode') }}",
-            type: 'POST',
-            dataType: 'json',
-            data: {},
-            success: function(json) {
-                if(json.success){
-                    $('#alert').html('');
-                    $('[role="alert"]').html('');
-                    $('[name="referral_code"]').val(json.code);
-                } else {
-                    $('[role="alert"]').html('');
-                    $('#alert').html('<div class="text-danger" role="alert">' + json.message + '</div>');
-                }
-            },
-            error: function(json) {
-                //
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        $('[name="referral_code"]').on('keyup', function(event) {
-            let code = $(this).val();
-            let userIdChose = $('[name="user_id"]').val();
-            if ( code.length ){
-                getAjaxUserByReferralCode(code, userIdChose);
-            } else {
-                $('#alert').html('');
-            }
-        });
-    });
-</script>
 @endsection

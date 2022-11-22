@@ -15,7 +15,7 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="p-label__small mr-4">ID</label>
+                                <label for="" class="p-label__medium mr-4">ID</label>
                                 <div class="w-75">
                                     {{ !empty($tour) ? str_pad($tour->id, 10, '0', STR_PAD_LEFT) : str_pad(Tour::max('id') + 1, 10, '0', STR_PAD_LEFT) }}
                                 </div>
@@ -56,7 +56,7 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Tên tour<span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__medium">Tên tour<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <input type="text" name="name" maxlength="256" data-field="name" value="{{$tour->name ?? ''}}" class="p-2 flex-fill w-100 js-length__input">
                                     <div class="text-right pt-1 is-length__input--name"><strong>0/100 Ký tự</strong></div>
@@ -74,7 +74,7 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Description</label>
+                                <label for="" class="mr-4 p-label__medium">Mô tả</label>
                                 <div class="w-75">
                                     <textarea name="description" id="editor" data-field="description" class="p-2 flex-fill w-100 js-length__input">{{old('description', $tour->description ?? '')}}</textarea>
                                     @error('description')
@@ -91,7 +91,7 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Số ngày diễn ra<span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__medium">Số ngày diễn ra<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <input type="number" name="tour_time" maxlength="256" data-field="tour_time" value="{{$tour->tour_time ?? '5'}}" class="p-2 flex-fill w-100 js-length__input">
                                     @error('tour_time')
@@ -108,11 +108,11 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Địa điểm và lộ trình<span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__medium">Địa điểm và lộ trình<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <select name="places[]" class="form-control" multiple id="chosen_places">
                                         @foreach ($places as $place)
-                                            <option value="{{ $place->id ?? '' }}">{{ $place->name ?? '' }}</option>
+                                            <option value="{{ $place->id ?? '' }}" {{ in_array($place->id, $tourPlaces) ? 'selected' : '' }}>{{ $place->name ?? '' }}</option>
                                         @endforeach
                                     </select>
                                     @error('tour_time')
@@ -129,10 +129,10 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Giá một người<span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__medium">Giá một người<span class="text-danger"> * </span></label>
                                 <div class="w-50">
-                                    <input type="text" name="tour_time" maxlength="256" data-field="tour_time" value="{{$tour->tour_time ?? '5'}}" class="p-2 flex-fill w-100 js-length__input">
-                                    @error('tour_time')
+                                    <input type="text" name="price_per_person" maxlength="256" data-field="price_per_person" value="{{$tour->price_per_person ?? '5'}}" class="p-2 flex-fill w-100 js-length__input">
+                                    @error('price_per_person')
                                     <div class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -146,7 +146,7 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Số người tối đa<span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__medium">Số người tối đa<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <input type="number" name="max_person" maxlength="256" data-field="max_person" value="{{$tour->max_person ?? '5'}}" class="p-2 flex-fill w-100 js-length__input">
                                     @error('max_person')
@@ -161,14 +161,14 @@ use App\Models\Tour;
                 </div>
                 <div class="col-12">
                     <div class="d-flex flex-row mb-3">
-                        <label for="" class="mr-4 p-label__small">Image</label>
+                        <label for="" class="mr-4 p-label__medium">Hình ảnh</label>
                         <div class="p-2 w-75">
                             <div id="pc_image_dz" class="dropzone dz-clickable border-secondary o-borderDash o-minHeight__0">
                                 <div class="dz-default dz-message needsclick d-flex flex-row p-2 justify-content-center">
                                     <i class="fas fa-cloud-download p-3 fa-4x o-iconColor"></i>
-                                    <p class="p-3 mt-3">Drag and drop images</p>
+                                    <p class="p-3 mt-3">Kéo và thả hình ảnh</p>
                                     <span class="mt-4">
-                                        <label for="product_main_image_url" class="filelabel o-buttonSize">Browse file</label>
+                                        <label for="product_main_image_url" class="filelabel o-buttonSize">Chọn tệp</label>
                                     </span>
                                 </div>
                             </div>
@@ -186,7 +186,7 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Chuyên mục<span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__medium">Chuyên mục<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <select name="category_id" id="" class="p-2 flex-fill w-100 form-control-chosen">
                                         @foreach ($categories as $category)
@@ -208,7 +208,7 @@ use App\Models\Tour;
     </div>
 
     <input type="hidden" name="id" value="{{ $tour->id ?? '' }}">
-    <input require type="hidden" name="category_thumb" id="category_thumb" value="{{old('category_thumb', $category->category_thumb ?? '')}}" />
+    <input require type="hidden" name="thumbnail" id="thumbnail" value="{{old('thumbnail', $tour->thumbnail ?? '')}}" />
 
     <div class="col-12 mt-4">
         <div class="d-flex flex-row mb-3 justify-content-center">
@@ -262,6 +262,6 @@ use App\Models\Tour;
     CKEDITOR.replace('editor', {
         language: 'en'
     });
-    $("#chosen_places").chosen()
+    $("#chosen_places").chosen({allow_duplicates:true,hide_results_on_select: false})
 </script>
 @endsection

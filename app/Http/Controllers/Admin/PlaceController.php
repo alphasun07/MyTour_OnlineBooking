@@ -13,7 +13,7 @@ class PlaceController extends Controller
     {
         $searchData = $request->input();
         $places = (new Place())->getAll($searchData['name'] ?? '')->paginate(config('const.page.limit'));
-        return view('admin.place.index', ['authgroup' => 'admin'], compact('places','searchData'));
+        return view('admin.place.index', compact('places','searchData'));
     }
 
     public function addDetail($id = 0)
@@ -34,9 +34,9 @@ class PlaceController extends Controller
                 Place::create($dataPost);
                 $request->session()->flash('success', 'Place has been created');
             } else {
-                $category = Place::findOrFail($id);
-                $category->fill($dataPost);
-                $category->save();
+                $place = Place::findOrFail($id);
+                $place->fill($dataPost);
+                $place->save();
                 $request->session()->flash('success', 'Place has been updated');
             }
             return redirect()->route('admin.place.list');
@@ -52,8 +52,8 @@ class PlaceController extends Controller
     {
         try {
             $id = $request->id;
-            $category = Place::find($id);
-            $category->delete();
+            $place = Place::find($id);
+            $place->delete();
             $request->session()->flash('success', 'place has been deleted');
             return [
                 'success' => true,

@@ -1,9 +1,9 @@
 @php
-use App\Models\Place;
+use App\Models\Service;
 @endphp
 @extends('admin.layout.app')
 @section('title')
-{{ 'Quản lý Tour' }}
+{{ 'Quản lý dịch vụ' }}
 @endsection
 @section('head')
 <style>
@@ -34,14 +34,14 @@ use App\Models\Place;
 @endsection
 @section('content')
 @section('pageTitle')
-@include('admin.common.page-title', ['title' => 'Quản lý', 'subTitle' => 'Quản lý Tour'])
+@include('admin.common.page-title', ['title' => 'Quản lý', 'subTitle' => 'Quản lý dịch vụ'])
 @endsection
     @csrf
     <div class="row ml-0">
         <div class="col-12 pl-0">
             <div class="d-flex flex-row">
                 <span class="w-25">
-                    <a class="btn btn-success btn-block" href="{{route('admin.tour.add')}}">Thêm mới</a>
+                    <a class="btn btn-success btn-block" href="{{route('admin.service.add')}}">Thêm mới</a>
                 </span>
             </div>
         </div>
@@ -57,23 +57,21 @@ use App\Models\Place;
                     <dl class="o-dl__display--table">
                         <dt class="o-dtDd__display--table-cell o-dt__width--1"></dt>
                         <dt class="o-dtDd__display--table-cell text-left o-dt__width--2">#</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-left">Name</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-center">Price /person</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-center">Status</dt>
-                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-center">Featured</dt>
+                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-left">Tên</dt>
+                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-center">Giá</dt>
+                        <dt class="o-dtDd__display--table-cell o-dt__width--7 text-center">Hiển thị</dt>
                         <dt class="o-dtDd__display--table-cell o-dt__width--5"></dt>
                     </dl>
                     <div id="js-sortable">
-                        @if ($tours->count() != 0)
-                            @foreach ($tours as $tour)
+                        @if ($services->count() != 0)
+                            @foreach ($services as $sevice)
                                 <dl class="o-dl__display--table">
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--1"></dd>
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--2">{{ $loop->iteration }}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-left o-dt__width--7">{{ $tour->name ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ $tour->price_per_person ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ ($tour->status_obj)['name'] ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ ($tour->featured_obj)['name'] ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.tour.detail', ['id' => $tour->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.tour.delete')}}" data-id="{{ $tour->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
+                                    <dd class="o-dtDd__display--table-cell text-left o-dt__width--7">{{ $sevice->name ?? '' }}</dd>
+                                    <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ $sevice->price ?? '' }}</dd>
+                                    <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">@if($sevice->status == Service::STATUS_ACTIVE) <i class="fa fa-check" aria-hidden="true"></i> @else <i class="fa fa-times" aria-hidden="true"></i> @endif</dd>
+                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.service.detail', ['id' => $sevice->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.service.delete')}}" data-id="{{ $sevice->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
                                 </dl>
                             @endforeach
                         @else
@@ -83,7 +81,7 @@ use App\Models\Place;
                                 </center>
                             </tr>
                         @endif
-                        <div class="d-flex justify-content-center">{{$tours->links()}}</div>
+                        <div class="d-flex justify-content-center">{{$services->links()}}</div>
                     </div>
                 </div>
             </div>
