@@ -57,7 +57,7 @@ class Tour extends Model
         return (new Helper)->commonObj(self::FEATURED_LIST, $this->featured);
     }
 
-    public function getAll($data) {
+    public function getAll($data = null) {
         $query = self::query();
         if ($data) {
             $query->where('name', 'LIKE', "%{$data}%")

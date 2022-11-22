@@ -28,8 +28,8 @@ class CouponRequest extends FormRequest
             'code' => 'required|max:255',
             'discount' => 'required|numeric',
             'coupon_type' => 'required',
-            'document_id' => 'required',
-            'times' => 'required|numeric',
+            'tour_id' => 'required',
+            'max_use' => 'required|numeric',
 
         ];
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CouponRequest;
 use App\Models\Coupon;
+use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -20,10 +21,11 @@ class CouponController extends Controller
     public function detail($id = 0)
     {
         $coupon = !empty($id) ? Coupon::find($id) : null;
+        $tours = (new Tour())->getAll()->get();
         if (!empty($id) && is_null($coupon)) {
             return redirect()->route('admin.coupon.list');
         }
-        return view('admin.coupon.detail', compact('coupon'));
+        return view('admin.coupon.detail', compact('coupon', 'tours'));
     }
 
     public function store(CouponRequest $request)

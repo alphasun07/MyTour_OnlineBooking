@@ -1,13 +1,13 @@
 @php
-use App\Models\PcmDmsCoupon;
+use App\Models\Coupon;
 @endphp
 @extends('admin.layout.app')
 @section('title')
-    {{ 'Coupon management' }}
+    {{ 'Quản lý khuyến mãi' }}
 @endsection
 @section('content')
     @section('pageTitle')
-        @include('admin.common.page-title', ['title' => 'Management', 'subTitle' => 'Coupon management'])
+        @include('admin.common.page-title', ['title' => 'Quản lý', 'subTitle' => 'khuyến mãi'])
     @endsection
     <div class="row ml-0">
         <div class="col-12 pl-0">
@@ -45,7 +45,7 @@ use App\Models\PcmDmsCoupon;
                                         <dd class="o-dtDd__display--table-cell o-dt__width--1"></dd>
                                         <dd class="o-dtDd__display--table-cell o-dt__width--1"><input class="form-check-input checkbox_children" type="checkbox" value="" id="flexCheckDefault"></dd>
                                         <dd class="o-dtDd__display--table-cell text-left"><a href="{{ route('admin.coupon.detail', ['id' => $coupon->id]) }}">{{$coupon->code ?? ''}}</a></dd>
-                                        <dd class="o-dtDd__display--table-cell text-left">{{PcmDmsCoupon::TYPE[$coupon->coupon_type] ?? ''}}</dd>
+                                        <dd class="o-dtDd__display--table-cell text-left">{{Coupon::TYPE[$coupon->coupon_type] ?? ''}}</dd>
                                         <dd class="o-dtDd__display--table-cell">{{$coupon->discount ?? ''}}</dd>
                                         <dd class="o-dtDd__display--table-cell">{{$coupon->times ?? ''}}</dd>
                                         <dd class="o-dtDd__display--table-cell o-dt__width--5">{{$coupon->used ?? ''}}</dd>

@@ -1,5 +1,5 @@
 @php
-use App\Models\PcmDmsCoupon;
+use App\Models\Coupon;
 @endphp
 @extends('admin.layout.app')
 @section('title')
@@ -57,7 +57,7 @@ use App\Models\PcmDmsCoupon;
                                 <div class="w-75">
                                     <select name="coupon_type" id="coupon_type" class="flex-fill w-100 js-length__input" style="width: 100%; padding:13px;">
                                         <option value="" selected disabled>-Select type-</option>
-                                        @foreach(PcmDmsCoupon::TYPE as $key => $value)
+                                        @foreach(Coupon::TYPE as $key => $value)
                                         <option {{ old('coupon_type', isset($coupon) ? $coupon->coupon_type : '') == $key ? 'selected' : '' }} name="interview_status" id="{{$key}}" value="{{$key}}">{{$value}}</option>
                                         @endforeach
                                     </select>
@@ -75,14 +75,14 @@ use App\Models\PcmDmsCoupon;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Document <span class="text-danger"> * </span></label>
+                                <label for="" class="mr-4 p-label__small">Tour <span class="text-danger"> * </span></label>
                                 <div class="w-75">
-                                    <select name="document_id" id="document_id" class="flex-fill w-100 js-length__input" style="width: 100%; padding:13px;">
-                                        @foreach($documents as $document)
-                                        <option {{ old('document_id', isset($coupon) ? $coupon->document_id : '') == $document->id ? 'selected' : ''}} value="{{$document->id}}">{{$document->filename}}</option>
+                                    <select name="tour_id" id="tour_id" class="flex-fill w-100 js-length__input" style="width: 100%; padding:13px;">
+                                        @foreach($tours as $tour)
+                                        <option {{ old('tour_id', isset($coupon) ? $coupon->tour_id : '') == $tour->id ? 'selected' : ''}} value="{{$tour->id}}">{{$tour->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('document_id')
+                                    @error('tour_id')
                                     <div class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -96,32 +96,10 @@ use App\Models\PcmDmsCoupon;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">User</label>
+                                <label for="" class="mr-4 p-label__small">Max use <span class="text-danger"> * </span></label>
                                 <div class="w-75">
-                                    <select name="user_id" id="user_id" class="flex-fill w-100 js-length__input" style="width: 100%; padding:13px;">
-                                        <option value="0">Select User</option>
-                                        @foreach($users as $user)
-                                        <option {{ old('user_id', isset($coupon) ? $coupon->user_id : '') == $user->id ? 'selected' : ''}} value="{{$user->id}}">{{$user->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_id')
-                                    <div class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex flex-row mb-3">
-                        <div class="p-2 w-100">
-                            <div class="d-flex flex-row">
-                                <label for="" class="mr-4 p-label__small">Times <span class="text-danger"> * </span></label>
-                                <div class="w-75">
-                                    <input type="number" name="times" value="{{old('times', $coupon->times ?? '')}}" maxlength="255" data-field="times" class="p-2 flex-fill w-100 js-length__input">
-                                    @error('times')
+                                    <input type="number" name="max_use" value="{{old('max_use', $coupon->max_use ?? '')}}" maxlength="255" data-field="max_use" class="p-2 flex-fill w-100 js-length__input">
+                                    @error('max_use')
                                     <div class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -150,7 +128,7 @@ use App\Models\PcmDmsCoupon;
                                 <label for="" class="mr-4 p-label__small">Published </label>
                                 <div class="w-75">
                                     <div class="d-flex">
-                                        @foreach(PcmDmsCoupon::PUBLISHED as $key => $value)
+                                        @foreach(Coupon::PUBLISHED as $key => $value)
                                         @php
                                         $published = old('published', isset($coupon) ? $coupon->published : '');
                                         @endphp
@@ -167,7 +145,7 @@ use App\Models\PcmDmsCoupon;
                 </div>
             </div>
         </div>
-        <input type="hidden" name="coupon_id" value="{{ old('coupon_id', isset($coupon->id) ? $coupon->id : '') }}">
+        <input type="hidden" name="id" value="{{ old('id', isset($coupon->id) ? $coupon->id : '') }}">
         <div class="col-12 mt-4">
             <div class="d-flex flex-row mb-3 justify-content-center">
                 <input class="btn btn-success" type="submit" value="Save">

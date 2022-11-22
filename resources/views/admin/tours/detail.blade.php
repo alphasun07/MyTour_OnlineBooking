@@ -45,7 +45,7 @@ use App\Models\Tour;
                             <div class="w-50">
                                 <select name="status" class="p-2 flex-fill w-100 form-control-chosen">
                                     @foreach (Tour::STATUS_LIST as $key => $value)
-                                    <option value="{{ $key ?? '' }}" {{ $tour->status == $key ? 'selected' : 0 }}>{{ $value ?? '' }}</option>
+                                    <option value="{{ $key ?? '' }}" {{ $tour && $tour->status == $key ? 'selected' : 0 }}>{{ $value ?? '' }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -112,7 +112,7 @@ use App\Models\Tour;
                                 <div class="w-50">
                                     <select name="places[]" class="form-control" multiple id="chosen_places">
                                         @foreach ($places as $place)
-                                            <option value="{{ $place->id ?? '' }}" {{ in_array($place->id, $tourPlaces) ? 'selected' : '' }}>{{ $place->name ?? '' }}</option>
+                                            <option value="{{ $place->id ?? '' }}" {{ (isset($place) && in_array($place->id, $tourPlaces)) ? 'selected' : '' }}>{{ $place->name ?? '' }}</option>
                                         @endforeach
                                     </select>
                                     @error('tour_time')
@@ -131,7 +131,7 @@ use App\Models\Tour;
                             <div class="d-flex flex-row">
                                 <label for="" class="mr-4 p-label__medium">Giá một người<span class="text-danger"> * </span></label>
                                 <div class="w-50">
-                                    <input type="text" name="price_per_person" maxlength="256" data-field="price_per_person" value="{{$tour->price_per_person ?? '5'}}" class="p-2 flex-fill w-100 js-length__input">
+                                    <input type="text" name="price_per_person" maxlength="256" data-field="price_per_person" value="{{$tour->price_per_person ?? ''}}" class="p-2 flex-fill w-100 js-length__input">
                                     @error('price_per_person')
                                     <div class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>

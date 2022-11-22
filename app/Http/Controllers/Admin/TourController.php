@@ -28,7 +28,7 @@ class TourController extends Controller
     public function detail($id = 0)
     {
         $tour = !empty($id) ? Tour::find($id) : null;
-        $tourPlaces = explode(',', $tour->places);
+        $tourPlaces = explode(',', $tour->places ?? '');
         $places = (new Place())->getAll()->get();
         $categories = (new PcmDmsCategory())->getListCategory()->get();
 
