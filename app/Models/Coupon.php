@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class PcmDmsCoupon extends Model
+class Coupon extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -16,11 +16,10 @@ class PcmDmsCoupon extends Model
         'code',
         'coupon_type',
         'discount',
-        'document_id',
-        'times',
+        'tour_id',
+        'max_use',
         'used',
         'published',
-        'user_id',
     ];
 
     const Public = 1;

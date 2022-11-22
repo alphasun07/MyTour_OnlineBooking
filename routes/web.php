@@ -132,6 +132,15 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::post('/store', [App\Http\Controllers\Admin\PostController::class, 'store'])->name('admin.post.store');
             Route::post('/delete', [App\Http\Controllers\Admin\PostController::class, 'delete'])->name('admin.post.delete');
         });
+
+        //coupon
+        Route::group(['prefix' => 'coupon'], function () {
+            Route::get('/', [App\Http\Controllers\Admin\CouponController::class, 'index'])->name('admin.coupon.list');
+            Route::get('/add', [App\Http\Controllers\Admin\CouponController::class, 'detail'])->name('admin.coupon.add');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\CouponController::class, 'detail'])->name('admin.coupon.detail');
+            Route::post('/store', [App\Http\Controllers\Admin\CouponController::class, 'store'])->name('admin.coupon.store');
+            Route::post('/delete', [App\Http\Controllers\Admin\CouponController::class, 'delete'])->name('admin.coupon.delete');
+        });
     });
 });
 
