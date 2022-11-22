@@ -10,6 +10,7 @@ class Place extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'places';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'country',

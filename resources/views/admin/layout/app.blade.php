@@ -79,7 +79,7 @@
                                                 <li><a href="#">Hóa đơn</a></li>
                                                 <li><a href="#">Khuyến mãi</a></li>
                                                 <li><a href="{{ route('admin.service.list') }}">Dịch vụ</a></li>
-                                                <li><a href="#">Tin tức</a></li>
+                                                <li><a href="{{ route('admin.post.list') }}">Tin tức</a></li>
                                                 <li><a href="{{ route('admin.member.list') }}">Khách hàng</a></li>
                                             </ul>
                                         </li>
