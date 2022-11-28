@@ -150,6 +150,14 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::post('/store', [App\Http\Controllers\Admin\OrderController::class, 'store'])->name('admin.order.store');
             Route::post('/delete', [App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('admin.order.delete');
         });
+        //salary
+        Route::group(['prefix' => 'salary'], function () {
+            Route::get('/', [App\Http\Controllers\Admin\SalaryController::class, 'index'])->name('admin.salary.list');
+            Route::get('/add', [App\Http\Controllers\Admin\SalaryController::class, 'detail'])->name('admin.salary.add');
+            Route::get('/edit/{id}', [App\Http\Controllers\Admin\SalaryController::class, 'detail'])->name('admin.salary.detail');
+            Route::post('/store', [App\Http\Controllers\Admin\SalaryController::class, 'store'])->name('admin.salary.store');
+            Route::post('/delete', [App\Http\Controllers\Admin\SalaryController::class, 'delete'])->name('admin.salary.delete');
+        });
     });
 });
 

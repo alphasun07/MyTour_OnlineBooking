@@ -105,9 +105,9 @@ use Carbon\Carbon;
                                 <label for="" class="mr-4 p-label__medium">Phương thức thanh toán<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <select name="payment_method" class="form-control" id="chosen_places1">
-                                        <option value="1">Ngân hàng</option>
-                                        <option value="2">Tiền mặt</option>
-                                        <option value="3">Tín dụng</option>
+                                        @foreach (Order::PAYMENT_METHOD_LIST as $key=>$value)
+                                        <option value="{{ $key ?? '' }}" {{ $key==$order->payment_method && isset($order->payment_method) ? "selected   " : "" }} >{{ $value }}</option>
+                                        @endforeach
                                     </select>
                                     @error('payment_method')
                                     <div class="text-danger" role="alert">
@@ -159,7 +159,7 @@ use Carbon\Carbon;
                             <div class="d-flex flex-row">
                                 <label for="" class="mr-4 p-label__medium">Ngày thanh toán<span class="text-danger"> * </span></label>
                                 <div class="w-50">
-                                    <input type="date" name="payment_date" maxlength="256" data-field="payment_date" value="{{Carbon::parse($order['payment_date'])->format('Y-m-d') ?? ''}}" class="p-2 flex-fill w-100 js-length__input">
+                                    <input type="date" name="payment_date" maxlength="256" data-field="payment_date" value="{{ isset($order['payment_date']) ? (Carbon::parse($order['payment_date'])->format('Y-m-d')) : '' }}" class="p-2 flex-fill w-100 js-length__input">
                                     @error('payment_date')
                                     <div class="text-danger" role="alert">
                                         <strong>{{ $message }}</strong>

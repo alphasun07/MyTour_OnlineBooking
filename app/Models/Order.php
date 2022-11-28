@@ -15,6 +15,16 @@ class Order extends Model
     const PUBLISHED_OFF = 0;
     const PUBLISHED_ON = 1;
 
+    const PAYMENT_BANKING = 1;
+    const PAYMENT_CASH = 2;
+    const PAYMENT_CREDIT = 3;
+
+    const PAYMENT_METHOD_LIST = [
+        self::PAYMENT_BANKING   => 'Ngân hàng',
+        self::PAYMENT_CASH      => 'Tiền mặt',
+        self::PAYMENT_CREDIT    => 'Thẻ tín dụng',
+    ];
+
     protected $table = "orders";
     protected $primaryKey = 'id';
 
