@@ -36,4 +36,17 @@ class SalaryController extends Controller
         $request->session()->flash('success', 'Lương đã được tính thành công');
         return redirect()->route('admin.salary.list');
     }
+
+    public function detail1(Request $request, $id)
+    {
+        $paramData = $request->all();
+        $salary = (new Salary())->find($id);
+        if (is_null($salary)) {
+            return redirect()->route('admin.salary.list');
+        }
+
+        $members = (new PcmMember())->getAll([]);
+
+        return view('admin.salaries.detail', compact('salary', 'members'));
+    }
 }

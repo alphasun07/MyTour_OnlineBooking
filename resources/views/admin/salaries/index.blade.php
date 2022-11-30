@@ -53,7 +53,7 @@ $now = Carbon::now();
                     <form method="get" action="">
                         <div class="border-bottom p-2 pl-2 d-flex">
                             <input class="form-control pr-2" type="number" name="month" min="1" max="12" value="{{ isset($searchData['month']) ? $searchData['month'] : $now->month }}">
-                            <input class="form-control pr-2" type="number" name="year" min="1" max="12" value="{{ isset($searchData['year']) ? $searchData['year'] : $now->year }}">
+                            <input class="form-control pr-2" type="number" name="year" min="2010" max="2030" value="{{ isset($searchData['year']) ? $searchData['year'] : $now->year }}">
                         <input class="form-control pr-2" type="text" name="name" placeholder="Search name" value="{{ isset($searchData['name']) ? $searchData['name'] : '' }}">
                             <input type="submit" class="btn btn-dark ml-2" value="Search">
                         </div>
