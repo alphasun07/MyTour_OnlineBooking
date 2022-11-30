@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class PcmMember extends Authenticatable
@@ -29,6 +30,16 @@ class PcmMember extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    const SORT_NO_ADMIN = 1;
+    const SORT_NO_STAFF_MANAGER = 2;
+    const SORT_NO_ACCOUNTANT = 3;
+
+    const SORT_NO_SALARY_LIST = [
+        self::SORT_NO_ADMIN => 250000,
+        self::SORT_NO_STAFF_MANAGER => 200000,
+        self::SORT_NO_ACCOUNTANT => 150000,
     ];
 
     const GENDER = [
@@ -56,5 +67,22 @@ class PcmMember extends Authenticatable
                 ->setBindings(['%' . $params['name'] . '%']);
         }
         return $query->orderBy('id')->paginate(config('const.page.limit'));
+    }
+
+    public function getMemberAndDayWorked($month, $year){
+        $query = self::select(['*']);
+
+        $queryDayWork = (new DayWorked)->select([
+            DB::raw('count(*) as total_day'),
+            'day_workeds.member_id',
+        ])->whereRaw('MONTH(created_at) = ' . $month)
+            ->whereRaw('YEAR(created_at) = ' . $year)
+            ->groupBy('member_id');
+
+        $query->joinSub($queryDayWork, 'count_day_worked', function($join){
+            $join->on('count_day_worked.member_id', '=', 'pcm_members.id');
+        });
+
+        return $query;
     }
 }

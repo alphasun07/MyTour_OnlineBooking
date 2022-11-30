@@ -51,10 +51,10 @@ $now = Carbon::now();
             <div class="d-flex flex-row">
                 <div class="o-container__background--white x_panel">
                     <form method="get" action="">
-                        <div class="border-bottom p-2 pl-2">
-                            <input type="number" name="month" min="1" max="12" value="{{ isset($searchData['month']) ? $searchData['month'] : '' }}">
-                            <input type="number" name="year" min="1" max="12" value="{{ isset($searchData['year']) ? $searchData['year'] : '' }}">
-                            <input type="text" name="name" value="{{ isset($searchData['name']) ? $searchData['name'] : '' }}">
+                        <div class="border-bottom p-2 pl-2 d-flex">
+                            <input class="form-control pr-2" type="number" name="month" min="1" max="12" value="{{ isset($searchData['month']) ? $searchData['month'] : $now->month }}">
+                            <input class="form-control pr-2" type="number" name="year" min="1" max="12" value="{{ isset($searchData['year']) ? $searchData['year'] : $now->year }}">
+                        <input class="form-control pr-2" type="text" name="name" placeholder="Search name" value="{{ isset($searchData['name']) ? $searchData['name'] : '' }}">
                             <input type="submit" class="btn btn-dark ml-2" value="Search">
                         </div>
                     </form>
@@ -75,7 +75,7 @@ $now = Carbon::now();
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--7">{{ $salary->member->name ?? '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ $salary->monthly_salary ?? '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ ($salary->countDayWorked[0])->total_day ?? '' }}</dd>
-                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.salary.detail', ['id' => $salary->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.salary.delete')}}" data-id="{{ $salary->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
+                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.salary.detail', ['id' => $salary->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a></dd>
                                 </dl>
                             @endforeach
                         @else

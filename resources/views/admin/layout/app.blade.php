@@ -86,7 +86,7 @@
                                         <li>
                                             <a class="md-flex"><i class="fal fa-clipboard-user"></i><span class="parent_menu ml-3">Nhân sự</span></a>
                                             <ul class="nav child_menu">
-                                                <li><a href="#">Lương</a></li>
+                                                <li><a href="{{ route('admin.salary.list') }}">Lương</a></li>
                                                 <li><a href="{{ route('admin.list') }}">Admin</a></li>
                                             </ul>
                                         </li>

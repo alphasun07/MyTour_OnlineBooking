@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Salary extends Model
-{
+{   
     use HasFactory, SoftDeletes;
     protected $table = 'salaries';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'user_id',
+        'member_id',
         'monthly_salary',
     ];
 
@@ -46,12 +46,22 @@ class Salary extends Model
 
         $query->with('member');
 
-        // $query->with(['countDayWorked' => function($queryDayWork) use ($month, $year){
-        //     // $queryDayWork->whereRaw('MONTH(created_at) = ' . $month)
-        //     //       ->whereRaw('YEAR(created_at) = ' . $year);
-        // }]);
+        $query->with(['countDayWorked' => function($queryDayWork) use ($month, $year){
+            $queryDayWork->whereRaw('MONTH(created_at) = ' . $month)
+                  ->whereRaw('YEAR(created_at) = ' . $year);
+        }]);
 
         $query->with('countDayWorked');
+
+        return $query;
+    }
+
+    public function checkSalaryExist($memberId, $month, $year){
+        $query = self::query();
+
+        $query->where('member_id', $memberId);
+        $query->whereRaw('MONTH(created_at) = ' . $month)
+            ->whereRaw('YEAR(created_at) = ' . $year);
 
         return $query;
     }
