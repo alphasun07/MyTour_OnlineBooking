@@ -16,6 +16,7 @@ class CreateDayWorkedsTable extends Migration
         Schema::create('day_workeds', function (Blueprint $table) {
             $table->id();
             $table->integer('member_id');
+            $table->integer('salary_id')->nullable();
             $table->integer('days_count');
             $table->timestamps();
             $table->softDeletes();

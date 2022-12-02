@@ -150,6 +150,7 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::post('/store', [App\Http\Controllers\Admin\OrderController::class, 'store'])->name('admin.order.store');
             Route::post('/delete', [App\Http\Controllers\Admin\OrderController::class, 'delete'])->name('admin.order.delete');
         });
+
         //salary
         Route::group(['prefix' => 'salary'], function () {
             Route::get('/', [App\Http\Controllers\Admin\SalaryController::class, 'index'])->name('admin.salary.list');
@@ -157,7 +158,14 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::get('/edit/{id}', [App\Http\Controllers\Admin\SalaryController::class, 'detail1'])->name('admin.salary.detail');
             Route::post('/store', [App\Http\Controllers\Admin\SalaryController::class, 'store'])->name('admin.salary.store');
             Route::post('/delete', [App\Http\Controllers\Admin\SalaryController::class, 'delete'])->name('admin.salary.delete');
+
+            Route::get('{salary_id}/days_worked', [App\Http\Controllers\Admin\DayWorkedController::class, 'index'])->name('admin.salary.dayWorked.index');
+            Route::get('/days_worked/add', [App\Http\Controllers\Admin\DayWorkedController::class, 'detail'])->name('admin.salary.dayWorked.add');
+            Route::get('/days_worked/edit/{id}', [App\Http\Controllers\Admin\DayWorkedController::class, 'detail'])->name('admin.salary.dayWorked.detail');
+            Route::post('/days_worked/store', [App\Http\Controllers\Admin\DayWorkedController::class, 'store'])->name('admin.salary.dayWorked.store');
+            Route::post('dayWorked/delete', [App\Http\Controllers\Admin\DayWorkedController::class, 'delete'])->name('admin.salary.dayWorked.delete');
         });
+
     });
 });
 

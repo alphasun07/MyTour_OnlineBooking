@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
 class Salary extends Model
-{   
+{
     use HasFactory, SoftDeletes;
     protected $table = 'salaries';
     protected $primaryKey = 'id';
@@ -17,6 +17,7 @@ class Salary extends Model
     protected $fillable = [
         'member_id',
         'monthly_salary',
+        'created_at',
     ];
 
     public function member() {
