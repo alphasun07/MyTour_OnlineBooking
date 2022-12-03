@@ -51,13 +51,28 @@ use App\Models\Salary;
                         </div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="d-flex flex-row mb-3">
+                        <div class="p-2 w-100">
+                            <div class="d-flex flex-row">
+                                <label for="" class="mr-4 p-label__medium"><span class="text-danger"></span></label>
+                                <div class="w-50">
+                                    <div class="ml-5 custom-control custom-radio">
+                                        <input type="checkbox" class="custom-control-input" id="display" name="calculate" value="1" >
+                                        <label for="display" class="custom-control-label" style="text-decoration: underline">Tính lại lương</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <input type="hidden" name="id" value="{{ $dayWorked->id ?? '' }}">
-    <input type="hidden" name="memver_id" value="{{ $dayWorked->member_id ?? '' }}">
-    <input type="hidden" name="salary_id" value="{{ $dayWorked->salary_id ?? 0 }}">
+    <input type="hidden" name="member_id" value="{{ $dayWorked->member_id ?? '' }}">
+    <input type="hidden" name="salary_id" value="{{ $salary_id ?? 0 }}">
 
     <div class="col-12 mt-4">
         <div class="d-flex flex-row mb-3 justify-content-center">

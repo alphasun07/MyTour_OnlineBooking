@@ -45,6 +45,27 @@ use Carbon\Carbon;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
+                                <label for="" class="mr-4 p-label__medium">Tour<span class="text-danger"> * </span></label>
+                                <div class="w-50">
+                                    <select name="tour_id" class="form-control" id="chosen_tours">
+                                        @foreach ($tours as $tour)
+                                            <option value="{{ $tour->id ?? '' }}" {{ (isset($order->tour_id) && $tour->id==$order->tour_id) ? 'selected' : '' }}>{{ $tour->name ?? '' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tour_time')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex flex-row mb-3">
+                        <div class="p-2 w-100">
+                            <div class="d-flex flex-row">
                                 <label for="" class="mr-4 p-label__medium">Người đặt<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <select name="user_id" class="form-control" id="chosen_places">
@@ -106,7 +127,7 @@ use Carbon\Carbon;
                                 <div class="w-50">
                                     <select name="payment_method" class="form-control" id="chosen_places1">
                                         @foreach (Order::PAYMENT_METHOD_LIST as $key=>$value)
-                                        <option value="{{ $key ?? '' }}" {{ $key==$order->payment_method && isset($order->payment_method) ? "selected   " : "" }} >{{ $value }}</option>
+                                        <option value="{{ $key ?? '' }}" {{ isset($order->payment_method) && $key==$order->payment_method ? "selected   " : "" }} >{{ $value }}</option>
                                         @endforeach
                                     </select>
                                     @error('payment_method')
@@ -243,5 +264,6 @@ use Carbon\Carbon;
 <script>
     $("#chosen_places").chosen({})
     $("#chosen_places1").chosen({})
+    $("#chosen_tours").chosen({})
 </script>
 @endsection

@@ -42,7 +42,7 @@ $now = Carbon::now();
         <div class="col-12 pl-0">
             <div class="d-flex flex-row">
                 <span class="w-25">
-                    <a class="btn btn-success btn-block" href="{{route('admin.salary.dayWorked.add')}}">Thêm công</a>
+                    <a class="btn btn-success btn-block" href="{{route('admin.salary.dayWorked.add', ['salary_id' => $salary_id ?? null])}}">Thêm công</a>
                 </span>
             </div>
         </div>
@@ -66,7 +66,7 @@ $now = Carbon::now();
                                     <dd class="o-dtDd__display--table-cell text-left o-dt__width--7">{{ $dayWorked->member->name ?? '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ $dayWorked->days_count ?? '' }}</dd>
                                     <dd class="o-dtDd__display--table-cell text-center o-dt__width--7">{{ $dayWorked->created_at }}</dd>
-                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.salary.dayWorked.detail', ['id' => $dayWorked->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.salary.dayWorked.delete')}}" data-id="{{ $dayWorked->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
+                                    <dd class="o-dtDd__display--table-cell o-iconRight pr-3 o-dt__width--5"><a href="{{ route('admin.salary.dayWorked.detail', ['salary_id' => $salary_id, 'id' => $dayWorked->id ?? ''])}}"><i class="fas fa-pencil-alt o-fontSize_1-5 pr-5"></i></a><i data-action="{{ route('admin.salary.dayWorked.delete')}}" data-id="{{ $dayWorked->id ?? '' }}" class="far fa-times o-fontSize_1-5 js-delete-custom--ajax"></i></dd>
                                 </dl>
                             @endforeach
                         @else

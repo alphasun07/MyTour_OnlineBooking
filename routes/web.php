@@ -160,8 +160,8 @@ Route::group(['middleware' => [App\Http\Middleware\CheckLogin::class]], function
             Route::post('/delete', [App\Http\Controllers\Admin\SalaryController::class, 'delete'])->name('admin.salary.delete');
 
             Route::get('{salary_id}/days_worked', [App\Http\Controllers\Admin\DayWorkedController::class, 'index'])->name('admin.salary.dayWorked.index');
-            Route::get('/days_worked/add', [App\Http\Controllers\Admin\DayWorkedController::class, 'detail'])->name('admin.salary.dayWorked.add');
-            Route::get('/days_worked/edit/{id}', [App\Http\Controllers\Admin\DayWorkedController::class, 'detail'])->name('admin.salary.dayWorked.detail');
+            Route::get('/days_worked/{salary_id}/add', [App\Http\Controllers\Admin\DayWorkedController::class, 'detail'])->name('admin.salary.dayWorked.add');
+            Route::get('/days_worked/{salary_id}/edit/{id}', [App\Http\Controllers\Admin\DayWorkedController::class, 'detail'])->name('admin.salary.dayWorked.detail');
             Route::post('/days_worked/store', [App\Http\Controllers\Admin\DayWorkedController::class, 'store'])->name('admin.salary.dayWorked.store');
             Route::post('dayWorked/delete', [App\Http\Controllers\Admin\DayWorkedController::class, 'delete'])->name('admin.salary.dayWorked.delete');
         });
