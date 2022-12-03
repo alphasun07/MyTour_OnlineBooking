@@ -1,77 +1,116 @@
 @php
-use App\Models\PcmDmsCategory;
 use App\Models\Option;
-
-$categories = (new PcmDmsCategory())->getListCategoryShowOnMenu();
 @endphp
-<header id="header" class="fixed-top header-scrolled" style="height: fit-content;">
-    <div class="container d-flex align-items-center">
-      <a href="{{ route('front.home') }}" class="logo me-auto">
-          <div class="row" style="width: 132%">
-            <div class="col-3 ">
-                {{-- <img  height="100%" width="55.74" style="border-radius: 50%;-moz-border-radius:50%;-webkit-border-radius: 50%;" src="{{ asset('storage/setting/' . (new Option)->getValueOptionTable('site_logo')->value ?? '') }}"> --}}
-            </div>
-            <img src="{{asset('images/pcmdonationlogo.png')}}" alt="Los Angeles" class="d-block w-100">
-          </div>
-      </a>
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul class="menu-nav">
-          <li class="{{ Route::getCurrentRoute()->category_id == '' ? 'active' : '' }}"><a class="nav-link scrollto" href="{{ route('front.home') }}">{{ trans('home.home') }}</a></li>
-          @foreach ($categories as $category)
-            <li class="{{ Route::getCurrentRoute()->category_id == $category->id ? 'active' : '' }} dropdown">
-              <a class="nav-link scrollto" href="{{ route('home.category.show', $category->id) }}">
-                {{ $category->name }}
-                <i class="bi bi-chevron-down"></i>
-              </a>
-              <ul>
-                <li class='dropdown'>
-                  ooo
-                  <i class="bi bi-chevron-right"></i>
-                  <ul>
-                    <li>111</li>
-                    <li>222</li>
-                    <li>333</li>
-                  </ul>
-                </li>
-                <li>ppp</li>
-                <li>qqq</li>
-              </ul>
-            </li>
-          @endforeach
-          @if (!Auth::check())
-          <li class="d-lg-none d-flex">
-            <a href="{{ route('user.showRegisterForm') }}"><span>{{ trans('home.register') }}</span></a>
-          </li>
-          <li class="d-lg-none d-flex">
-            <a href="{{ route('user.showLoginForm') }}"><span>{{ trans('home.login') }}</span></a>
-          </li>
-          @else
-          <li class="d-lg-none d-flex">
-            <a href="" ><span
-            onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ trans('home.logout') }}</span></a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-            </form>
-          </li>
-          <li class="d-lg-none d-flex">
-            <a href="{{ route('home.profile.show', auth('web')->id() ?? '' ) }}"><span><i class="fa fa-user" aria-hidden="true"></i> {{ Auth::User()->name }}</span></a>
-          </li>
-          @endif
-        </ul>
-        <i class="bi mobile-nav-toggle bi-list"></i>
-      </nav><!-- .navbar -->
-      @if (!Auth::check())
-        <a style="border-radius: 100px; margin-left: auto;color:#0DA0F2;border-color: #0DA0F2;overflow: hidden;text-overflow: ellipsis;max-height: 38px" href="{{ route('user.showRegisterForm') }}" class="d-none d-md-inline btn btn-outline-primary register"><span>Login / Register</span></a>
-      @else
-        <a style="border-radius: 100px; margin-left: auto;color:#0DA0F2;border-color: #0DA0F2;overflow: hidden;text-overflow: ellipsis;max-height: 38px" href="" class="btn btn-outline-primary d-none d-md-inline"><span
-        onclick="event.preventDefault();document.getElementById('logout-form').submit();"> {{ trans('home.logout') }}</span></a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
-        </form>
-        <a href="{{ route('home.profile.show', auth('web')->id() ?? '' ) }}" class="appointment-btn scrollto d-none d-md-inline" style="max-width: 170px;overflow: hidden;text-overflow: ellipsis;"><span><i class="fa fa-user" aria-hidden="true"></i> {{ Auth::User()->name }}</span></a>
-      @endif
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-1 pb-0 pt-0 ">
+    <a class="navbar-brand m-0" href="index.php"><img src="{{ asset('images/image/logo.png') }}" class="img-fluid ml-2" alt="Responsive image" style="max-width: 70%"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item dropdown active p-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 500; font-size:small;">
+            Du lịch
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <div class="row-fluid" style="min-width: 992px">
+                <ul class="unstyled span4 m-4" style="float: left; list-style-type: none;">
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">TOUR MIỀN BẮC</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Hà Nội</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Hải Phòng</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Hạ Long</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Bắc Ninh</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Phú Thọ</a></li>
+                    <li class="mt-2 mb-2"><u><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">Xem tất cả</a></u></li>
+                </ul>
+                <ul class="unstyled span4 m-4" style="float: left; list-style-type: none;">
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">TOUR Miền Trung</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Huế</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Quảng Trị</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Quảng Bình</a>
+                    </li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Đà Nẵng</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Quảng Nam</a></li>
+                    <li class="mt-2 mb-2"><u><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">Xem tất cả</a></u></li>
+                </ul>
+                <ul class="unstyled span4 m-4" style="float: left; list-style-type: none;">
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">TOUR MIỀN TÂY NAM BỘ</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Phú Quốc</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Tiền Giang</a>
+                    </li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Cần Thơ</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Vĩnh Long</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Sóc Trăng</a></li>
+                    <li class="mt-2 mb-2"><u><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">Xem tất cả</a></u></li>
+                </ul>
+                <ul class="unstyled span4 m-4" style="float: left; list-style-type: none;">
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">TOUR MIỀN ĐÔNG NAM BỘ</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Bà Rịa - Vũng
+                        Tàu</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Côn Đảo</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch TP.Hồ Chí Minh</a>
+                    </li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Tây Ninh</a></li>
+                    <li class="mt-2 mb-2"><a href="#" style="color: #282365; font-size: small;">Du lịch Bình Dương</a>
+                    </li>
+                    <li class="mt-2 mb-2"><u><a href="#" style="color: #282365; font-size: small;" class="font-weight-bold">Xem tất cả</a></u></li>
+                </ul>
+                </div>
+            </li>
+            </ul>
+        </li>
+
+        <li class="nav-item dropdown active p-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 500; font-size:small;">
+            Vận chuyển
+            </a>
+        </li>
+
+        <li class="nav-item dropdown active p-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 500; font-size:small;">
+            Tin tức
+            </a>
+        </li>
+
+        <li class="nav-item dropdown active p-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 500; font-size:small;">
+            Khuyến mãi
+            </a>
+        </li>
+
+        <li class="nav-item active p-2" id="navbarDropdown">
+            <a class="nav-link disabled" style="font-weight: 500; font-size:small;" href="#">VietravelPlus</a>
+        </li>
+
+        <li class="nav-item active p-2 " id="navbarDropdown">
+            <a class="nav-link disabled" style="font-weight: 500; font-size:small;" href="#">Liên hệ</a>
+        </li>
+
+        </ul>
+
+        <!--  Tìm kiếm trong thanh menu  -->
+
+        <form class="form-inline my-2 my-lg-0" method="GET" action="listtour.php">
+        <input class="form-control mr-1 sm-2 border-warning" type="text" name="search" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
+        <button class="btn btn-outline my-2 my-sm-0 mr-1" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        <div class="dropdown show mr-5">
+            <a class="btn btn-secondary dropdown-toggle"  style="background: #ffffff;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                <i class="fas fa-user" style="color: black;"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="dropdownMenuLink" >
+            <a class="dropdown-item" href="#">Quản lý</a>
+            <a class="dropdown-item" href="#">Thông tin</a>
+            <a class="dropdown-item" href="#">Lịch sử</a>
+            <a class="dropdown-item" href="#">Đăng xuất</a>
+            </div>
+        </div>
+        <button type="button" class="btn btn-light"><a href="#"><i class="fas fa-user" style="color: black;"></i></a></button>
     </div>
-  </header>
+
+</nav>
 
 

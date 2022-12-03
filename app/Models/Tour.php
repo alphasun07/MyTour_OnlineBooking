@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Tour extends Model
 {
@@ -70,4 +71,45 @@ class Tour extends Model
         return $query;
     }
 
+    public function getNew($limit = 10){
+        $query = self::query();
+        $query->orderBy('created_at', 'desc');
+        $query->limit($limit);
+
+        return $query;
+    }
+
+    public function getFeatured($limit = 3, $status = self::STATUS_VAL){
+        $query = self::query();
+        $query->orderBy('created_at', 'desc');
+        $query->where('featured', self::FEATURED_ON);
+        if ($status) {
+            $query->where('status', $status);
+        }
+        $query->limit($limit);
+
+        return $query;
+    }
+
+    public function getMostOrder(){
+        $query = self::select(['*']);
+
+        $queryCountOrder = (new Order)->select([
+            DB::raw('count(*) as count_order'),
+                'orders.tour_id',
+        ])->groupBy('tour_id');
+
+        $query->joinSub($queryCountOrder, 'count_order_table', function($join){
+            $join->on('count_order_table.tour_id', '=', 'tours.id');
+        })->orderBy('count_order_table.count_order', 'desc');
+
+        return $query;
+    }
+
+    public function getById($id){
+        $query = self::select(['*']);
+        $query->where('id', $id);
+
+        return $query;
+    }
 }

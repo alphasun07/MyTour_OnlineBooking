@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\DtbPost;
-use App\Models\PcmDmsCategory;
-use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\DtbQuestion;
-use App\Models\User;
+use App\Models\PcmDmsCategory;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use App\Models\PcmDmsDocument;
 use App\Models\PcmUser;
+use App\Models\Tour;
 
 class TopController extends Controller
 {
@@ -21,10 +17,16 @@ class TopController extends Controller
     public function index()
     {
         try{
-            $documents = (new PcmDmsDocument)->getAll()->get();
-            return view('front.home.index', compact('documents'));
+            $newTours = (new Tour())->getNew()->get();
+            $categories = (new PcmDmsCategory())->getDiscovery()->get();
+            $fTours = (new Tour())->getFeatured()->get();
+            $mTours = (new Tour())->getMostOrder();
+            $mTours1 = $mTours->skip(0)->take(4)->get();
+            $mTours2 = $mTours->skip(4)->take(4)->get();
+            return view('front.home.index', compact('newTours', 'categories', 'fTours', 'mTours1', 'mTours2'));
         } catch (\Exception $e) {
-            log::error('group. message: '. $e->getMessage());
+            dd($e->getMessage());
+            Log::error('group. message: '. $e->getMessage());
             abort(500);
         }
     }

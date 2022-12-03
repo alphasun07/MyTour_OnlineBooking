@@ -105,4 +105,9 @@ class PcmDmsCategory extends Model
     {
         return self::where('id', $category_id)->where('published', self::PUBLISHED_ON);
     }
+
+    public function getDiscovery($limit = 10)
+    {
+        return self::where('published', self::PUBLISHED_ON)->orderBy('ordering', 'asc')->limit($limit);
+    }
 }

@@ -6,12 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Front\RegisterInformationController;
-use App\Http\Controllers\Front\PostController as frontPostController;
+use App\Http\Controllers\Front\TourController;
 use App\Http\Controllers\Front\ForumController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\QuestionController;
-use App\Http\Controllers\Admin\AnswersController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskArticleController;
 use App\Http\Controllers\Front\DocumentController;
 use App\Http\Controllers\Front\PayPalController;
 use App\Http\Controllers\Front\DownloadController;
@@ -19,14 +15,7 @@ use App\Http\Controllers\Front\CategoryController;
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\PageController;
 use App\Http\Controllers\Front\SupportTicketsController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskLabelController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskStatusController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskCategoryController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskConfigController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskPriorityController;
-use App\Http\Controllers\Admin\Helpdesk\HelpdeskEmailController;
 use App\Http\Controllers\Admin\Helpdesk\HelpdeskTicketController;
-use App\Http\Controllers\Admin\Helpdesk\ActivitiesReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -188,10 +177,10 @@ Route::group(['middleware' => 'locale'], function() {
 
     Route::post('/register_information/store', [RegisterInformationController::class, 'store'])->name('home.register_information.store');
 
-    Route::group(['prefix' => 'post'], function () {
-        Route::get('/', [frontPostController::class, 'filterList'])->name('home.post.search');
-        Route::get('/detail/{id}', [frontPostController::class, 'show'])->name('home.post.show');
-        Route::get('/{category_id}', [frontPostController::class, 'listPosts'])->name('home.post.list');
+    Route::group(['prefix' => 'tour'], function () {
+        Route::get('/', [TourController::class, 'filterList'])->name('home.tour.search');
+        Route::get('/detail/{id}', [TourController::class, 'show'])->name('home.tour.show');
+        Route::get('/{category_id}', [TourController::class, 'listPosts'])->name('home.tour.list');
     });
 
     Route::group(['prefix' => 'category'], function() {
