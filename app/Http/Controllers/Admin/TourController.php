@@ -6,7 +6,9 @@ use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\Models\PcmDmsCategory;
 use App\Models\Place;
+use App\Models\Service;
 use App\Models\Tour;
+use App\Models\TourService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -28,14 +30,18 @@ class TourController extends Controller
     public function detail($id = 0)
     {
         $tour = !empty($id) ? Tour::find($id) : null;
-        $tourPlaces = explode(',', $tour->places ?? '');
-        $places = (new Place())->getAll()->get();
-        $categories = (new PcmDmsCategory())->getListCategory()->get();
 
         if (!empty($id) && is_null($tour)) {
             return redirect()->route('admin.tour.list');
         }
-        return view('admin.tours.detail', compact('tour', 'places', 'categories', 'tourPlaces'));
+
+        $tourPlaces = explode(',', $tour->places ?? '');
+        $services = (new Service())->getAll(null)->get();
+        $servicesTour = (new TourService())->getByTourId($tour->id)->pluck('service_id')->toArray();
+        $places = (new Place())->getAll()->get();
+        $categories = (new PcmDmsCategory())->getListCategory()->get();
+
+        return view('admin.tours.detail', compact('tour', 'places', 'categories', 'tourPlaces', 'servicesTour', 'services'));
     }
 
     public function store(Request $request)
@@ -43,6 +49,7 @@ class TourController extends Controller
         try {
             $dataPost = $request->all();
             $id = $dataPost['id'] ?? 0;
+            $dataPost['places'] = implode(',', $dataPost['places']);
             if (!$id) {
                 Tour::create($dataPost);
                 $request->session()->flash('success', 'Tour has been created');

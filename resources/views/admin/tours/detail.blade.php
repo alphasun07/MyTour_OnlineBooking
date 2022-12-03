@@ -129,6 +129,27 @@ use App\Models\Tour;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
+                                <label for="" class="mr-4 p-label__medium">Dịch vụ<span class="text-danger"> * </span></label>
+                                <div class="w-50">
+                                    <select name="services[]" class="form-control" multiple id="chosen_services">
+                                        @foreach ($services as $service)
+                                            <option value="{{ $service->id ?? '' }}" {{ (isset($service) && in_array($service->id, $servicesTour)) ? 'selected' : '' }}>{{ $service->name ?? '' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tour_time')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex flex-row mb-3">
+                        <div class="p-2 w-100">
+                            <div class="d-flex flex-row">
                                 <label for="" class="mr-4 p-label__medium">Giá một người<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <input type="text" name="price_per_person" maxlength="256" data-field="price_per_person" value="{{$tour->price_per_person ?? ''}}" class="p-2 flex-fill w-100 js-length__input">
@@ -263,5 +284,6 @@ use App\Models\Tour;
         language: 'en'
     });
     $("#chosen_places").chosen({allow_duplicates:true,hide_results_on_select: false})
+    $("#chosen_services").chosen()
 </script>
 @endsection

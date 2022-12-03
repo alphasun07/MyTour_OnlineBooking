@@ -47,6 +47,10 @@ class Tour extends Model
         'featured',
     ];
 
+    public function services() {
+        return $this->belongsToMany(Service::class, 'tour_services');
+    }
+
     protected $append = ['status_obj', 'featured_obj'];
 
     public function getStatusObjAttribute() {
