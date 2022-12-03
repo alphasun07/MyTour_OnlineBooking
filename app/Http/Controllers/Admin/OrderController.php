@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrderRequest;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderService;
 use App\Models\PcmUser;
+use App\Models\Service;
 use App\Models\Tour;
 use Illuminate\Support\Facades\Log;
 
@@ -29,8 +31,10 @@ class OrderController extends Controller
 
         $users = (new PcmUser())->getAllUsers([])->get();
         $tours = (new Tour())->getAll()->get();
+        $services = (new Service())->getAll(null)->get();
+        $servicesOrder = isset($order->id) ? (new OrderService())->getByOrderId($order->id)->pluck('service_id')->toArray() : [];
 
-        return view('admin.order.detail', compact('order', 'users', 'tours'));
+        return view('admin.order.detail', compact('order', 'users', 'tours', 'servicesOrder', 'services'));
     }
 
     public function store(OrderRequest $request)
@@ -40,16 +44,19 @@ class OrderController extends Controller
             $id = $dataOrder['id'] ?? null;
 
             if(!$id){
-                Order::create($dataOrder);
+                $order = Order::create($dataOrder);
+                $order->services()->sync($dataOrder['services']);
             }else{
                 $order = Order::findOrFail($id);
                 $order->fill($dataOrder);
                 $order->save();
+                $order->services()->sync($dataOrder['services']);
             }
 
             $request->session()->flash('success', 'Order has been saved.');
             return redirect()->route('admin.order.list');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             Log::info('---store tag---');
             Log::error($e->getMessage());
             $request->session()->flash('error', "An error occurred.");

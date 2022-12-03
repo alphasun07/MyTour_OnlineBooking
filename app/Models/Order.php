@@ -58,6 +58,10 @@ class Order extends Model
         return $this->belongsToMany(PcmDmsDocument::class, 'pcm_dms_order_item', 'order_id', 'document_id');
     }
 
+    public function services() {
+        return $this->belongsToMany(Service::class, 'order_services');
+    }
+
     public function orderItem()
     {
         return $this->hasMany(PcmDmsOrderItem::class, 'order_id', 'id');

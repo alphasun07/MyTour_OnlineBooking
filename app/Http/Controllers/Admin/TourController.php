@@ -51,12 +51,14 @@ class TourController extends Controller
             $id = $dataPost['id'] ?? 0;
             $dataPost['places'] = implode(',', $dataPost['places']);
             if (!$id) {
-                Tour::create($dataPost);
+                $tour = Tour::create($dataPost);
+                $tour->services()->sync($dataPost['services']);
                 $request->session()->flash('success', 'Tour has been created');
             } else {
                 $tour = Tour::findOrFail($id);
                 $tour->fill($dataPost);
                 $tour->save();
+                $tour->services()->sync($dataPost['services']);
                 $request->session()->flash('success', 'Tour has been updated');
             }
             return redirect()->route('admin.tour.list');

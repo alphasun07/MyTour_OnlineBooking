@@ -66,6 +66,27 @@ use Carbon\Carbon;
                     <div class="d-flex flex-row mb-3">
                         <div class="p-2 w-100">
                             <div class="d-flex flex-row">
+                                <label for="" class="mr-4 p-label__medium">Dịch vụ<span class="text-danger"> * </span></label>
+                                <div class="w-50">
+                                    <select name="services[]" class="form-control" multiple id="chosen_services">
+                                        @foreach ($services as $service)
+                                            <option value="{{ $service->id ?? '' }}" {{ (isset($service) && in_array($service->id, $servicesOrder)) ? 'selected' : '' }}>{{ $service->name ?? '' }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tour_time')
+                                    <div class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex flex-row mb-3">
+                        <div class="p-2 w-100">
+                            <div class="d-flex flex-row">
                                 <label for="" class="mr-4 p-label__medium">Người đặt<span class="text-danger"> * </span></label>
                                 <div class="w-50">
                                     <select name="user_id" class="form-control" id="chosen_places">
@@ -265,5 +286,6 @@ use Carbon\Carbon;
     $("#chosen_places").chosen({})
     $("#chosen_places1").chosen({})
     $("#chosen_tours").chosen({})
+    $("#chosen_services").chosen({})
 </script>
 @endsection
