@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class DayWorked extends Model
 {
@@ -15,6 +16,7 @@ class DayWorked extends Model
 
     protected $fillable = [
         'member_id',
+        'salary_id',
         'days_count',
         'created_at',
     ];
@@ -38,6 +40,17 @@ class DayWorked extends Model
         $query->whereRaw('MONTH(created_at) = ' . $month)
             ->whereRaw('YEAR(created_at) = ' . $year);
 
+        return $query;
+    }
+
+    public function getTotalDay($salary_id){
+        $query = self::select([
+            DB::raw('count(*) as total'),
+            'day_workeds.member_id',
+        ]);
+
+        $query->where('salary_id', $salary_id);
+        $query->groupBy('salary_id');
         return $query;
     }
 }

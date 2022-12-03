@@ -71,8 +71,8 @@ use App\Models\Salary;
     </div>
 
     <input type="hidden" name="id" value="{{ $dayWorked->id ?? '' }}">
-    <input type="hidden" name="member_id" value="{{ $dayWorked->member_id ?? '' }}">
-    <input type="hidden" name="salary_id" value="{{ $salary_id ?? 0 }}">
+    <input type="hidden" name="member_id" value="{{ $salary->member_id ?? '' }}">
+    <input type="hidden" name="salary_id" value="{{ $salary->id ?? 0 }}">
 
     <div class="col-12 mt-4">
         <div class="d-flex flex-row mb-3 justify-content-center">

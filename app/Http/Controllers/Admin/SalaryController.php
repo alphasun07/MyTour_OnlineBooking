@@ -33,6 +33,12 @@ class SalaryController extends Controller
                 ]);
                 $dayId = (new DayWorked())->getByMemberId($dayWorked->id, $now->month, $now->year)->pluck('id')->toArray();
                 (new DayWorked())->whereIn('id', $dayId)->update(['salary_id' => $createdSalary->id]);
+            } else {
+                $check->update([
+                    'monthly_salary'    => ((PcmMember::SORT_NO_SALARY_LIST)[$dayWorked->sort_no]) * $dayWorked->total_day
+                ]);
+                $dayId = (new DayWorked())->getByMemberId($dayWorked->id, $now->month, $now->year)->pluck('id')->toArray();
+                (new DayWorked())->whereIn('id', $dayId)->update(['salary_id' => $check->id]);
             }
         }
 
