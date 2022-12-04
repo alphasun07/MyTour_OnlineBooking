@@ -110,6 +110,17 @@ class Tour extends Model
         $query = self::select(['*']);
         $query->where('id', $id);
 
+        $queryCountOrder = (new Order)->select([
+            DB::raw('count(*) as count_order'),
+                'orders.tour_id',
+        ])->groupBy('tour_id');
+
+        $query->leftJoinSub($queryCountOrder, 'count_order_table', function($join){
+            $join->on('count_order_table.tour_id', '=', 'tours.id');
+        });
+
+        $query->with('services');
+
         return $query;
     }
 }

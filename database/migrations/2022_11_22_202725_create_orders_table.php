@@ -23,8 +23,8 @@ class CreateOrdersTable extends Migration
             $table->double('total_amount', 10, 2);
             $table->integer('discount');
             $table->dateTime('payment_date');
-            $table->tinyInteger('published');
-            $table->string('comment');
+            $table->tinyInteger('published')->default(1);
+            $table->string('comment')->nullable();
             $table->double('payment_amount', 10, 2);
             $table->string('payment_currency');
             $table->integer('order_number');

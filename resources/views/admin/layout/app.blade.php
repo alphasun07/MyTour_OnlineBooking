@@ -90,12 +90,6 @@
                                                 <li><a href="{{ route('admin.list') }}">Admin</a></li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            <a class="md-flex"><i class="fas fa-chart-bar"></i></i><span class="parent_menu ml-3">Kế toán</span></a>
-                                            <ul class="nav child_menu">
-                                                <li><a href="#">Quản lý doanh thu</a></li>
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>

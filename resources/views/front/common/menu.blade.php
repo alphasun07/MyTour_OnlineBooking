@@ -2,7 +2,7 @@
 use App\Models\Option;
 @endphp
 <nav class="navbar navbar-expand-lg navbar-light bg-light p-1 pb-0 pt-0 ">
-    <a class="navbar-brand m-0" href="index.php"><img src="{{ asset('images/image/logo.png') }}" class="img-fluid ml-2" alt="Responsive image" style="max-width: 70%"></a>
+    <a class="navbar-brand m-0" href="{{ route('front.home') }}"><img src="{{ asset('images/image/logo.png') }}" class="img-fluid ml-2" alt="Responsive image" style="max-width: 70%"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -97,6 +97,7 @@ use App\Models\Option;
         <input class="form-control mr-1 sm-2 border-warning" type="text" name="search" placeholder="Bắt đầu tìm kiếm..." aria-label="Search">
         <button class="btn btn-outline my-2 my-sm-0 mr-1" type="submit"><i class="fas fa-search"></i></button>
         </form>
+        @if (Auth::check())
         <div class="dropdown show mr-5">
             <a class="btn btn-secondary dropdown-toggle"  style="background: #ffffff;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                 <i class="fas fa-user" style="color: black;"></i>
@@ -105,10 +106,12 @@ use App\Models\Option;
             <a class="dropdown-item" href="#">Quản lý</a>
             <a class="dropdown-item" href="#">Thông tin</a>
             <a class="dropdown-item" href="#">Lịch sử</a>
-            <a class="dropdown-item" href="#">Đăng xuất</a>
+            <a class="dropdown-item" href="{{ route('user.logout') }}">Đăng xuất</a>
             </div>
         </div>
-        <button type="button" class="btn btn-light"><a href="#"><i class="fas fa-user" style="color: black;"></i></a></button>
+        @else
+        <button type="button" class="btn btn-light"><a href="{{ route('user.showLoginForm') }}"><i class="fas fa-user" style="color: black;"></i></a></button>
+        @endif
     </div>
 
 </nav>

@@ -66,7 +66,6 @@ class RegisterController extends Controller
             'password_confirmation'     => ['required', 'string', 'same:password'],
             'email'                     => ['required', 'email', 'max:255', Rule::unique('pcm_users', 'email', 'deleted_at')->withoutTrashed()],
             'email_confirm'             => ['required', 'email', 'same:email'],
-            'g-recaptcha-response'      => ['required', new \App\Rules\ValidRecaptcha],
         ]);
     }
 
@@ -97,7 +96,6 @@ class RegisterController extends Controller
 
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
-        $data['referral_code'] = (new Helper())->makeRandomReferralCode() ?? '';
 
         event(new Registered($user = $this->createUser($data)));
 
@@ -114,9 +112,5 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        $sender = (new PcmDmsConfig())->getValueConfig('notification_emails') ?? '';
-        $dispatch = dispatch(new CheckMailRegister($user, $sender));
-
-        return redirect()->route('front.home');
     }
 }

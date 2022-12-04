@@ -1,8 +1,8 @@
 @php
+use Carbon\Carbon;
+$now = Carbon::now();
 @endphp
-@section('title')
-{{ ucfirst($tour->name ?? '') }}
-@endsection
+@extends('front.common.app_login')
 @section("content")
 <main role="main">
     <div class="tour-detail">
@@ -13,9 +13,9 @@
                     <div class="row">
                         <div class="col-md-6 col-12 left">
                             <div class="warp-mark">
-                                <i class="fal fa-ticket"></i><label>{{ $tour->id . $tour->tour_time . $tour->price_per_person . $tour->status . $tour->featured }}</label>
+                                <i class="fal fa-ticket"></i><label>{{ $tour->id . '_' . $tour->tour_time . '_' . $tour->price_per_person . '_' . $tour->status . '_' . $tour->featured }}</label>
                             </div>
-                            <h1 class="title">{{$tour->tour_name ?? '' }}</h1>
+                            <h1 class="title">{{$tour->name ?? '' }}</h1>
                             <div class="short-rating">
                                 <div class="s-rate">
                                     <span>9.08</span>
@@ -32,13 +32,13 @@
                         <div class="col-md-6 col-12 right">
                             <div class="group-price">
                                 <div class="sale-price">
-                                    <p><span class="price">{{ $tour->price_per_person ?? '' }}</span>/ khách</p>
+                                    <p><span class="price">{{ number_format(($tour->price_per_person ?? 0), 0, "", ",") }}₫</span>/ khách</p>
                                 </div>
                                 <div class="saving">
                                 </div>
                             </div>
                             <div class="group-add-cart">
-                                <a href="#"
+                                <a href="{{ route('home.tour.book', ['id' => $tour->id]) }}"
                                     class="add-to-cart">
                                     <i class="fal fa-shopping-cart"></i>
                                     <label>
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-lg-7 col-md-12 col-sm-12 left">
                             <div class="image">
-                                <img src={{ asset('storage/tours/'.$tour->thumbnail)}}
+                                <img src={{ asset('storage/tours/' . $tour->thumbnail)}}
                                     class="img-fluid" alt="image">
                             </div>
                         </div>
@@ -76,25 +76,19 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-5 col-12 left">
-                                <p class="s-title-03 tour-des">{{$tour->description}}</p>
+                                <p class="s-title-03 tour-des"><?php echo $tour->description ?></p>
                                 <div class="box-code d-lg-none">
                                     <div class="d-flex flex-column">
                                         <span>Mã tour:</span>
-                                        <span class="fw-bold">{{ $tour->id . $tour->tour_time . $tour->price_per_person . $tour->status . $tour->featured }}</span>
+                                        <span class="fw-bold">{{ $tour->id . '_' . $tour->tour_time . '_' . $tour->price_per_person . '_' . $tour->status . '_' . $tour->featured }}</span>
                                     </div>
                                     <i class="icon icon--ticket"></i>
                                 </div>
                                 <div class="box-order">
                                     <div class="time">
-                                        <p>Khởi hành <b>12/11/2021</b></p>
+                                        <p>Khởi hành <b>{{ $now->addDay(7)->format('d/n/Y') }}</b></p>
                                         <p>Thời gian <b>{{ $tour->tour_time ?? '' }}</b></p>
-                                        {{ $tour->places ?? '' }}
-                                    </div>
-                                    <div class="calendar">
-                                        <div class="calendar-box">
-                                            <i class="icon icon--calendar"></i>
-                                            <label><a href="/tim-tour/NDSGN907/ket-qua-tim-kiem.aspx"> Ngày khác</a></label>
-                                        </div>
+                                        {{ ($places[0])->name ?? '' }}
                                     </div>
                                 </div>
                                 <div class="box-support">
@@ -118,12 +112,15 @@
                                     <div class="item">
                                         <i class="icon icon--calendar"></i>
                                         <label>Thời gian</label>
-                                        <p>{{ $tour->tour_time ?? ''}}</p>
+                                        <p>{{ $tour->tour_time ?? ''}} ngày</p>
                                     </div>
                                     <div class="item">
                                         <i class="icon icon--map"></i>
                                         <label>Điểm tham quan</label>
-                                        <p></p>
+                                        <p>@foreach ($places as $place)
+                                            {{ $place->name ?? '' }}
+                                            <br>
+                                        @endforeach</p>
                                     </div>
                                     <div class="item">
                                         <i class="icon icon--fire"></i>
@@ -138,11 +135,15 @@
                                     <div class="item">
                                         <i class="icon icon--tour"></i>
                                         <label>Phương tiện di chuyển</label>
-                                        <p>Máy bay Vietnam Airlines hạng Thương Gia</p>
+                                        <p></p>
                                     </div>
                                     <div class="item">
                                         <i class="icon icon--sparkle"></i>
                                         <label>Dịch vụ đi kèm</label>
+                                        <p>@foreach ($tour->services as $service)
+                                            {{ $service->name ?? '' }}
+                                            <br>
+                                        @endforeach</p>
                                     </div>
                                 </div>
                                 <div class="box-map hardCode d-none">
@@ -172,15 +173,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-12">
-                                <h2 class="mb-4">Lịch trình</h2>
+                                <h2 class="mb-4">Lịch trình:
+                                    @foreach ($places as $place)
+                                        {{ $place->name ?? '' }} @if(!$loop->last) -> @endif
+                                    @endforeach
+                                </h2>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="section-07 mb-5">
-                    <div class="container">
-                        <div class="row" style='justify-content: right;'>
-                        {{ $tour->places ?? ''}}
                         </div>
                     </div>
                 </section>
@@ -195,79 +193,7 @@
 
             </div>
         </div>
-        <div class="related d-none d-lg-block">
-
-            <section class="section-11" id="divTourGoiY">
-                <div class="container">
-                    <div class="row">
-                        <h2>Có thể Quý khách sẽ thích</h2>
-                        <div class="products">
-                            <div class="product">
-                                <div class="product-inner">
-                                    <div class="product-image">
-                                        <a
-                                            href="/tourNDSGN905-029-201121VN-P/nha-trang-trai-nghiem-golf-du-thuyen-ngam-hoang-hon-an-lam-bay-chuong-trinh-nghi-duong-tai-an-lam-retreats-ninh-van-bay-cung-hang-khong-vietnam-airlines-hang-thuong-gia.aspx">
-                                            <img src="https://media.travel.com.vn/destination/tf_200724040240_477695.jpg"
-                                                alt="image">
-                                        </a>
-                                        <a href="#" class="wishlist-button"><i class="icon icon--heart"></i></a>
-                                        <div class="s-rate">
-                                            <span>9.28</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <span class="meta"> 20/11/2021 </span>
-                                        <h3 class="product-title">
-                                            <a href="/tourNDSGN905-029-201121VN-P/nha-trang-trai-nghiem-golf-du-thuyen-ngam-hoang-hon-an-lam-bay-chuong-trinh-nghi-duong-tai-an-lam-retreats-ninh-van-bay-cung-hang-khong-vietnam-airlines-hang-thuong-gia.aspx"
-                                                title="Nha Trang - Trải Nghiệm Golf - Du Thuyền Ngắm Hoàng Hôn An Lâm Bay - Chương trình nghỉ dưỡng tại An Lam Retreats Ninh Van Bay - Cùng hàng không Vietnam Airlines hạng Thương Gia">Nha
-                                                Trang - Trải Nghiệm Golf - Du Thuyền Ngắm Hoàng Hôn An Lâm Bay - Chương
-                                                trình nghỉ dưỡng tại An Lam Retreats Ninh Van Bay - Cùng hàng không
-                                                Vietnam Airlines hạng Thương Gia</a>
-                                        </h3>
-                                        <p class="des">Nơi khởi hành TP. Hồ Chí Minh</p>
-                                        <div class="row">
-                                            <div class="btn-book col-5">
-                                                <a id="btnDatNgay"
-                                                    href="/Booking/TourBooking?tourId=1cca2620-51dc-4388-a82a-d89791eef22f"
-                                                    class="btn btn-primary btn-sm">
-                                                    <i class="icon icon--shopping p-1"></i><label>Đặt ngay</label>
-                                                </a>
-                                            </div>
-                                            <div class="group-price col-7">
-                                                <div class="sale-price">
-                                                    <span class="price">23,990,000 ₫</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
     </div>
-
-    <div class="mb-total d-none">
-        <div class="total">
-            <i class="icon icon--chevron-up"></i>
-
-        </div>
-        <div class="group-btn">
-
-            <div class="summary">
-                <div class="group-price">
-                    <span class="price"> 24,990,000₫</span>
-                </div>
-                <span class="rating"><i class="icon icon--star"></i> 9.3</span>
-            </div>
-            <a type="button" href="/Booking/TourBooking?tourId=965c5d09-b690-4307-9bd9-defc52da3968"
-                class="btn-order">Tiếp tục</a>
-        </div>
-    </div>
-
 
     <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

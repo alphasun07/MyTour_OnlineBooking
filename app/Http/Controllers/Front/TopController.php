@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\PcmUser;
 use App\Models\Tour;
+use Illuminate\Support\Facades\Auth;
 
 class TopController extends Controller
 {
@@ -29,6 +30,13 @@ class TopController extends Controller
             Log::error('group. message: '. $e->getMessage());
             abort(500);
         }
+    }
+
+    public function userLogout()
+    {
+        Auth::logout();
+
+        return redirect()->back();
     }
 
     public function changeLanguage($language)

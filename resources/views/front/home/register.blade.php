@@ -72,19 +72,6 @@ PCM Donation - Register / Login
                                     @enderror
                                 </div>
                             </div>
-                            <!-- Google reCaptcha -->
-                            <div class="row mb-4">
-                                <label class="col-md-3 pt-0 col-form-label text-md-end text-start">&nbsp;</label>
-                                <div class="col-md-9">
-                                    <div class="g-recaptcha d-flex" id="feedback-recaptcha" data-sitekey="{{ config('app.GOOGLE_RECAPTCHA_KEY')  }}"></div>
-                                    @error('g-recaptcha-response')
-                                    <div class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <!-- End Google reCaptcha -->
                         </div>
                         <div class="text-center mt-5"><button type="submit">{{ trans('home.register') }}</button></div>
                     </form>
@@ -144,5 +131,4 @@ PCM Donation - Register / Login
 </section>
 @endsection
 @section('scripts')
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @endsection

@@ -17,7 +17,7 @@
     <p class="m-2" style="color:#282365; font-size:xx-large; font-weight: 600;">Các tour mới nhất</p>
     <div class="items justify-content-center" style="width: 100%">
         @foreach ($newTours as $newTour)
-            <div class="m-2"><a href="#"><img src="{{ (asset('storage/tours/' . ($newTour->thumbnail))) }}"
+            <div class="m-2"><a href="{{ route('home.tour.show', ['id' => $newTour->id]) }}"><img src="{{ (asset('storage/tours/' . ($newTour->thumbnail))) }}"
             style="width: 100%; border-radius: 5px;" class="h-latest-tour-image"></a></div>
         @endforeach
     </div>
@@ -50,17 +50,17 @@
     @foreach ($fTours as $ft)
         <div class="card uu-dai">
             <div class="h-card-container">
-                <a href="#">
+                <a href="{{ route('home.tour.show', ['id' => $ft->id]) }}">
                 <img src="{{ (asset('storage/tours/' . ($ft->thumbnail))) }}" class="card-img-top h-latest-tour-image" alt="...">
                 </a>
                 <div class="h-card-rank">{{ $ft['rank_name'] ?? '' }}</div>
             </div>
             <div class="card-body">
                 <p class="card-text mb-1"><small class="text-muted">28/10/2022 - {{ $ft->tour_time ?? '' }} ngày</small></p>
-                <a href="#"><h5 class="card-title pr-2 mb-1" style="color: #282365; font-size: medium;">{{ $ft->name ?? '' }}</h5></a>
-                <p class="card-text"><b style="font-size: large; color:#FD5056;">{{ $ft->price_per_person }}đ</b><small class="text-muted">/người</small></p>
-                <a href="#" @if(!isset($_SESSION["user_id"])) onclick="return check_login()" @endif class="btn btn-danger" style="font-size: small; background-color: #D74449;"><i class="fas fa-shopping-cart"></i>&#160;Đặt ngay</a>
-                <a href="#" class="btn btn-light" style="font-size: small; background-color: #ffffff; float: right; border: 1px solid #2f24a7; color: #2f24a7;">Xem chi tiết</a>
+                <a href="{{ route('home.tour.show', ['id' => $ft->id]) }}"><h5 class="card-title pr-2 mb-1" style="color: #282365; font-size: medium;">{{ $ft->name ?? '' }}</h5></a>
+                <p class="card-text"><b style="font-size: large; color:#FD5056;">{{ number_format(($ft->price_per_person ?? 0), 0, "", ",") }}đ</b><small class="text-muted">/người</small></p>
+                <a href="{{ route('home.tour.book', ['id' => $ft->id]) }}" @if(!Auth::check()) onclick="return check_login()" @endif class="btn btn-danger" style="font-size: small; background-color: #D74449;"><i class="fas fa-shopping-cart"></i>&#160;Đặt ngay</a>
+                <a href="{{ route('home.tour.show', ['id' => $ft->id]) }}" class="btn btn-light" style="font-size: small; background-color: #ffffff; float: right; border: 1px solid #2f24a7; color: #2f24a7;">Xem chi tiết</a>
             </div>
         </div>
     @endforeach
@@ -77,7 +77,7 @@
     <div class="card-deck">
     @foreach ($mTours1 as $mTour)
         <div class="card" style="border: transparent;">
-            <a href="#"><img src="{{ asset('storage/tours/'.$mTour->thumbnail) ?? '' }}" class="card-img-top pb-0 h-fav-tour-image" alt="..." style="border-radius: 10px;"></a>
+            <a href="{{ route('home.tour.show', ['id' => $mTour->id]) }}"><img src="{{ asset('storage/tours/'.$mTour->thumbnail) ?? '' }}" class="card-img-top pb-0 h-fav-tour-image" alt="..." style="border-radius: 10px;"></a>
             <div class="card-body p-0">
             <small class="p-2 pt-0" style="color:#282365;">Đã có {{ $mTour->count_order ?? '' }} lượt đặt</small>
             </div>
@@ -87,7 +87,7 @@
     <div class="card-deck">
     @foreach ($mTours2 as $mTour) {
         <div class="card" style="border: transparent;">
-            <a href="#"><img src="{{ asset('storage/tours/'.$mTour->thumbnail) ?? '' }}" class="card-img-top pb-0 h-fav-tour-image" alt="..." style="border-radius: 10px;"></a>
+            <a href="{{ route('home.tour.show', ['id' => $mTour->id]) }}"><img src="{{ asset('storage/tours/'.$mTour->thumbnail) ?? '' }}" class="card-img-top pb-0 h-fav-tour-image" alt="..." style="border-radius: 10px;"></a>
             <div class="card-body p-0">
             <small class="p-2 pt-0" style="color:#282365;">Đã có {{ $mTour->count_order ?? '' }} lượt đặt</small>
             </div>
