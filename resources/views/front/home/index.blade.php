@@ -34,7 +34,7 @@
     @foreach ($categories as $category)
         <div class="row" id="box-search">
             <div class="thumbnail text-center">
-            <div class="m-4 mr-5"><a href="#"><img src="{{ (asset('storage/categories/' . ($category->category_thumb))) }}"
+            <div class="m-4 mr-5"><a href="{{ route('home.tour.list', ['category_id' => $category->id]) }}"><img src="{{ (asset('storage/categories/' . ($category->category_thumb))) }}"
                     style="width: 100%; border-radius: 10px;"></a></div>
             <div class="caption">
                 <p class="ml-2" style="color:white; font-size: large; font-weight: 600; "><br>Tour {{ $category->name ?? '' }}</p>

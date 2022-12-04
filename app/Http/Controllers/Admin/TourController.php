@@ -37,7 +37,7 @@ class TourController extends Controller
 
         $tourPlaces = explode(',', $tour->places ?? '');
         $services = (new Service())->getAll(null)->get();
-        $servicesTour = (new TourService())->getByTourId($tour->id)->pluck('service_id')->toArray();
+        $servicesTour = !is_null($tour) ? ((new TourService())->getByTourId($tour->id)->pluck('service_id')->toArray()) : [];
         $places = (new Place())->getAll()->get();
         $categories = (new PcmDmsCategory())->getListCategory()->get();
 

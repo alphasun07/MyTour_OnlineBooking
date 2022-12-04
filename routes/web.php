@@ -182,7 +182,7 @@ Route::group(['middleware' => 'locale'], function() {
         Route::get('/', [TourController::class, 'filterList'])->name('home.tour.search');
         Route::get('/detail/{id}', [TourController::class, 'show'])->name('home.tour.show');
         Route::get('/book/{id}', [TourController::class, 'book'])->name('home.tour.book');
-        Route::get('/{category_id}', [TourController::class, 'listPosts'])->name('home.tour.list');
+        Route::get('/{category_id}', [TourController::class, 'listTours'])->name('home.tour.list');
         Route::get('/checkout/{id}', [TourController::class, 'checkoutShow'])->name('home.tour.checkout.show');
     });
     Route::post('/checkout_ing', [TourController::class, 'checkout'])->name('home.tour.checkout_ing');

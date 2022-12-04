@@ -211,7 +211,7 @@ use App\Models\Tour;
                                 <div class="w-50">
                                     <select name="category_id" id="" class="p-2 flex-fill w-100 form-control-chosen">
                                         @foreach ($categories as $category)
-                                        <option value="{{ $category->id ?? '' }}" {{ $category->id && $tour->category_id && $category->id==$tour->category_id ? 'selected' : '' }}>{{ $category->name ?? '' }}</option>
+                                        <option value="{{ $category->id ?? '' }}" {{ $category->id && isset($tour->category_id) && $category->id==$tour->category_id ? 'selected' : '' }}>{{ $category->name ?? '' }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')

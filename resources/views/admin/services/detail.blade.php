@@ -126,7 +126,6 @@ use App\Models\Service;
 @endsection
 @section('scripts')
 <!-- parsley.js -->
-<script src="{{ asset('js/admin/dropzone-common.js') }}"></script>
 <script src="{{ asset('js/admin/common.js') }}"></script>
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <script>

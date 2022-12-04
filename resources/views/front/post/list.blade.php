@@ -1,67 +1,36 @@
 @php
-use App\Models\PcmDmsCategory;
+use Carbon\Carbon;
+$now = Carbon::now();
 @endphp
-@extends('front.common.app', ['active' =>  $active])
-@section('title')
-{{ ucfirst($category->name ?? '') }}
-@endsection
+@extends('front.common.app')
 @section("content")
-<section class="wrapper" style="margin-top: 80px;">
-    <div class="container mt-5 mb-5 p-5 pt-3 border-bottom">
-        <div class="category-nav">
-            @foreach ($list_categories as $list_category)
-                <div class="d-flex flex-row border-bottom cate">
-                    @foreach ($list_category as $child)
-                        <a href="{{ route('home.post.list', $child) }}" class="hidden3l cate-item {{ (in_array($child, $list_parent_ids) || $child == $category->id) ? 'active' : '' }}">{{ ucfirst((PcmDmsCategory::find($child))['name_'.config('app.locale')]) }}</a>
-                    @endforeach
+<main>
+    <div class="mr-auto ml-auto" style="max-width: 1300px">
+        <br>
+        <br>
+
+        <div class="card-deck">
+            @foreach ($tours as $t)
+                <div class="card uu-dai taks">
+                <div class="h-card-container">
+                    <a href="{{ route('home.tour.show', ['id' => $t->id]) }}">
+                    <img src="{{ asset('storage/tours/' . $t->thumbnail ?? '') }}" class="card-img-top h-latest-tour-image" alt="...">
+                    </a>
+                    <div class="h-card-rank">{{ $t->sth ?? ''}}</div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-1"><small class="text-muted">{{ $t->tour_time ?? 5 }} ngày</small></p>
+                    <a href="{{ route('home.tour.show', ['id' => $t->id]) }}"><h5 class="card-title pr-2 mb-1" style="color: #282365; font-size: medium;">{{ $t->name ?? '' }}</h5></a>
+                    <p class="card-text"><b style="font-size: large; color:#FD5056;">{{number_format(($t->price_per_person ?? 0), 0, "", ",")}}đ</b><small class="text-muted">/người</small></p>
+                    <a href="{{ route('home.tour.book', ['id' => $t->id]) }}" class="btn btn-danger" style="font-size: small; background-color: #D74449;"><i
+                        class="fas fa-shopping-cart"></i>&#160;Đặt ngay</a>
+                    <a href="{{ route('home.tour.show', ['id' => $t->id]) }}" class="btn btn-light" style="font-size: small; background-color: #ffffff; float: right; border: 1px solid #2f24a7; color: #2f24a7;">Xem chi tiết</a>
+                </div>
                 </div>
             @endforeach
         </div>
-        <div class="post-list-container mt-5 row">
-            <div class=" col-lg-8 col-md-7 col-12 pe-4">
-                @if (is_null($highlight_post_by_category) && $posts_by_category->isEmpty())
-                    <div class="text-center mt-5 mb-5" style="opacity:0.6;">{{ trans('home.no_result') }}</div>
-                @else
-                    @if (!is_null($highlight_post_by_category))
-                        <a href="{{ route('home.post.show', $highlight_post_by_category->id) }}">
-                            <div class="highlight row">
-                                <div class="pic col-md-7 col-5 d-flex d-md-block justify-content-center align-items-center"><img src="{{ !empty($highlight_post_by_category->image) ? asset('storage/posts/'.$highlight_post_by_category->image) : asset('/css/icons/noimage.png') }}" width="100%" class="img-fluid" alt=""></div>
-                                <div class="col-md-5 col-7">
-                                    <div class="text pt-4">
-                                        <h3 class="title-box">{{ $highlight_post_by_category['title_'.config('app.locale')] ?? '' }}</h3>
-                                        <p class="brief hidden3l">{{ $highlight_post_by_category['brief_'.config('app.locale')] ?? '' }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    @endif
-                    <div class="post-list">
-                        @foreach ($posts_by_category as $post)
-                            @if (!is_null($highlight_post_by_category) && $post->id == $highlight_post_by_category->id)
-                                @continue
-                            @endif
-                            <hr>
-                            <a href="{{ route('home.post.show', ['id' => $post->id]) }}">
-                                <div class="post row">
-                                    <div class="col-8 p-2">
-                                        <h3 class="title-box">{{ $post['title_'.config('app.locale')] ?? '' }}</h3>
-                                        <p class="brief hidden3l">{{ $post['brief_'.config('app.locale')] ?? '' }}</p>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="pic"><img src="{{ !empty($post->image) ? asset('storage/posts/'.$post->image) : asset('/css/icons/noimage.png') }}" class="img-fluid" alt=""></div>
-                                    </div>
-                                </div>
-                            </a>
-                        @endforeach
-                    </div>
-                    <div class="d-flex mt-5 justify-content-center">{{ $posts_by_category->links() }}</div>
-                @endif
-            </div>
-            <div class="col-lg-4 col-md-5 col-12 ">
-                @include('front.common.side-highlight-post')
-            </div>
-        </div>
+        <div class="d-flex justify-content-center">{{$tours->links()}}</div>
     </div>
-</section>
+</main>
 @endsection
 

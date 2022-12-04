@@ -123,4 +123,10 @@ class Tour extends Model
 
         return $query;
     }
+
+    public function getByCategoryId($category_id){
+        $query = self::where('category_id', $category_id);
+
+        return $query;
+    }
 }

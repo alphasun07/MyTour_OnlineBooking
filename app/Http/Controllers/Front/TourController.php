@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Place;
 use App\Models\Tour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TourController extends Controller
 {
@@ -41,7 +42,7 @@ class TourController extends Controller
         try {
             $dataPost = $request->all();
             $tour = (new Tour())->getById($request->tour_id)->first();
-            $userId = 1;
+            $userId = Auth::user()->id;
             $dataPost['tour_id'] = $tour->id;
             $dataPost['user_id'] = $userId;
 
@@ -49,8 +50,14 @@ class TourController extends Controller
 
             return redirect('https://squareup.com/us/en/online-checkout');
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function listTours($category_id)
+    {
+        $tours = (new Tour())->getByCategoryId($category_id)->paginate(10);
+
+        return view('front.post.list', compact('tours'));
     }
 }
